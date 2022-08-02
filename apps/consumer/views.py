@@ -1,34 +1,40 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth.models import User
-from .models import * 
-from .forms import UserRegisterForm
-from django.http import HttpResponse
-from django.contrib.auth import authenticate, login
+from django.contrib.auth import get_user_model
+from django.contrib.auth import login, authenticate
 from django.contrib.auth.forms import UserCreationForm
+from django.contrib.auth.models import User
+from django.http import HttpResponse
 from django.contrib import messages
+from .forms import RegisterForm
 
 # Create your views here.
 
-def home_index(request):
-	return render(request, 'account/homepage.html')
-
-
-def register(request):
-    if request.method == 'POST':
-        form = UserRegisterForm(request.POST)
+def register(response):
+    if response.method == "POST":
+        form = RegisterForm(response.POST)
         if form.is_valid():
-            name = form.cleaned_data['name']
-            messages.success(request, f'Usuario {name} creado')
-            return redirect('base/base.html')
+            form.save()
+
+        return redirect('consumer:base')
     else:
-        form = UserRegisterForm()
+        form = RegisterForm()
+    
 
-    context = { 'form' : form }
-    return render(request, 'account/register.html')
-
-
+    return render(response, 'account/register.html', {"form":form})
 
 
+
+
+
+def home_index(request):
+    return render(request, 'account/homepage.html')
+
+def base_view(request):
+    return render(request, 'base/base.html')
+
+ 
+def login_view(request):
+    return render(request, 'base/base.html')
 
 
 

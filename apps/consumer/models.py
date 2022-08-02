@@ -14,6 +14,7 @@ class User(AbstractUser):
         ('M', _('Male'))
     ]
     #: First and last name do not cover name patterns around the globe
+    username = None
     name = models.CharField(blank=True, max_length=50)
     first_name = models.CharField(max_length=50)
     dni = models.CharField(max_length=8, null=True, unique=True)
@@ -28,7 +29,7 @@ class User(AbstractUser):
 
 
     USERNAME_FIELD = 'email'
-    REQUIRED_FIELDS = ['username']
+    REQUIRED_FIELDS = []
 
     def __str__(self):
         return self.email
