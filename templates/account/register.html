@@ -35,22 +35,143 @@
 <body class="bg-gradient-primary">
 
      {% block content %}
+    <div class="container">
+        <!-- Outer Row -->
+        <div class="row justify-content-center">
+            <div class="col-xl-10 col-lg-12 col-md-9">
+                <div class="card o-hidden border-0 shadow-lg my-5">
+                    <div class="card-body p-0">
+                        <!-- Nested Row within Card Body -->
+                        <div class="row-center">
+                            <div class="p-5">
+                                <div class="text-center">
+                                    <h1 class="h4 text-gray-900 mb-4">¡Register!</h1>
+                                </div>
+                        <form method="POST" class="form-group">
+                                {% csrf_token %}
+                                <!-- Sección de formulario datos (Nombre / Apellido / Cedula) -->
 
-     <div class="container">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                    <label for="name" name="name">Name</label>
+                                    {{ form.name }}
+                                </div>
+                            </div>
+                        </div>
 
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                    <label for="first_name" name="first_name">First name</label>
+                                    {{ form.first_name }}
+                                </div>
+                            </div>
+                        </div>
 
-                <form method="POST" class="form-group">
-                {% csrf_token %}
-                {{form}}
-        <button type="submit" class="btn btn-success">Registrarse</button>
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                    <label for="dni" name="dni">Dni</label>
+                                    {{ form.dni }}
+                                </div>
+                            </div>
+                        </div>
+                                <!-- Cierre de Sección de datos -->
+                            <!-- Sección de formulario datos(Direccion / Telefono / Correo) -->
 
-    </form>
-                
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                    <label for="direction" name="direction">Direction</label>
+                                    {{ form.direction }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                   <label for="phone" name="phone">Phone</label>
+                                    {{ form.phone }}
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                   <label for="email" name="email">My Email</label>
+                                    {{ form.email }}
+                                </div>
+                            </div>
+                        </div>
+                            <!-- Cierre de Sección de datos -->
+                        <!-- Sección de formulario(Contraseña / Confirmacion de Contraseña) -->
+
+                         <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                   <label for="password1" name="password1">Password</label>
+                                    {{ form.password1 }}
+                                </div>
+                            </div>
+                        </div>
+
+
+                        <div class="row">
+                            <div class="col-md-8 col-md-offset-2">
+                                <div class="form-group">
+                                <label for="password2" name="password2">Confirm Password</label>
+                                    {{ form.password2 }}
+                                </div>
+                            </div>
+                        </div>
+                             <!-- Cierre de Sección de datos -->
+                        <!-- Sección de Seleccion de tipo de usuario default Estudiante-->
+                        <div class="row">
+                            <div class="d-flex mb-5 align-items-center">
+                                <label class="control control--checkbox mb-0"><span class="caption">Student</span>
+                                    {{ form.is_student }}
+                                <div class="control__indicator"></div>
+                                </label>
+                            </div>
+                                
+                            <div class="d-flex mb-5 align-items-center">
+                                <label class="control control--checkbox mb-0"><span class="caption">Moderator</span>
+                                    {{ form.is_moderator }}
+                                <div class="control__indicator"></div>
+                                </label>
+                            </div>
+
+                            <div class="d-flex mb-5 align-items-center">
+                                <label class="control control--checkbox mb-0"><span class="caption">Teacher</span>
+                                    {{ form.is_teacher }}
+                                <div class="control__indicator"></div>
+                                </label>
+                            </div>
+                        </div>
+                    <!-- Cierre de Sección de tipo de usuario -->
+                    <!-- Sección de Seleccion de tipo de sexo-->
+                    <div class="row">    
+                                    {{  form.gender }}
+                        </div>
+                        <br>
+                        <br>
+                        <!-- Cierre de Sección de tipo de sexo -->       
+                            <button type="submit" class="btn btn-success">Registrarse</button>
+                        </form>
+                                <hr>
+                                <div class="text-center">
+                                    <a class="small" href="{% url 'consumer:login' %}">¿Ya tienes una cuenta? Iniciar Session.</a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-    </div>
+    </div> 
 
     {% endblock%}
 
