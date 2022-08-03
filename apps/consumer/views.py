@@ -37,10 +37,10 @@ def login_view(request):
                 return redirect('consumer:studentpage')
             elif user is not None and user.is_teacher:
                 login(request, user)
-                return redirect('teacherpage')
+                return redirect('consumer:teacherpage')
             elif user is not None and user.is_moderator:
                 login(request, user)
-                return redirect('moderatorpage')
+                return redirect('consumer:moderatorpage')
             else:
                 msg = ' Invalid credentials'
         else:
@@ -48,6 +48,8 @@ def login_view(request):
 
 
     return render(request, 'account/login.html', {'form': form, 'msg': msg})
+
+
 
 
 
