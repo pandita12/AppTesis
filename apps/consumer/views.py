@@ -62,12 +62,12 @@ def base_view(request):
 
 
 def student_view(request):
-    return render(request, 'base/base.html')
+    return render(request, 'profile/profile-students.html')
 
 
 def teacher_view(request):
-    return render(request, 'base/base.html')
+    return render(request, 'profile/profile-teacher.html')
 
 
 def moderator_view(request):
-    return render(request, 'base/base.html')
+    return render(request, 'profile/profile-moderator.html')
