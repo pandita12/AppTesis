@@ -1,11 +1,15 @@
+from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
 from django.contrib.auth import authenticate, login 
 from django.contrib.auth.forms import UserCreationForm
+from django.views.generic import TemplateView
 from django.contrib.auth.models import User
+from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
+from django.utils.decorators import method_decorator
 
 # Create your views here.
 
@@ -51,9 +55,6 @@ def login_view(request):
 
 
 
-
-
-
 def home_index(request):
     return render(request, 'account/homepage.html')
 
@@ -61,13 +62,28 @@ def base_view(request):
     return render(request, 'base/base.html')
 
 
+    
+
 def student_view(request):
     return render(request, 'profile/profile-students.html')
 
 
-def teacher_view(request):
-    return render(request, 'profile/profile-teacher.html')
+#@login_required
+#def teacher_view(request):
+    #return render(request, 'profile/profile-teacher.html')
 
 
+class teacherView(TemplateView):
+    template_name = 'profile/profile-teacher.html'
+
+
+    @method_decorator(csrf_exempt)
+    @method_decorator(login_required)
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
+
+
+
+#@login_required(login_url ='/login/')
 def moderator_view(request):
     return render(request, 'profile/profile-moderator.html')
