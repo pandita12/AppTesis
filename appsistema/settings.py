@@ -62,6 +62,8 @@ ROOT_URLCONF = 'appsistema.urls'
 
 AUTH_USER_MODEL = 'consumer.User'
 
+LOGIN_URL = '/login/'
+
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',

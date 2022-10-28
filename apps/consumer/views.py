@@ -10,6 +10,7 @@ from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
 from django.utils.decorators import method_decorator
+from django.contrib.auth.mixins import LoginRequiredMixin
 
 # Create your views here.
 
@@ -63,27 +64,38 @@ def base_view(request):
 
 
     
-
+@login_required
 def student_view(request):
     return render(request, 'profile/profile-students.html')
 
 
-#@login_required
+
 #def teacher_view(request):
     #return render(request, 'profile/profile-teacher.html')
 
 
-class teacherView(TemplateView):
+class TeacherView(LoginRequiredMixin,TemplateView):
     template_name = 'profile/profile-teacher.html'
 
 
-    @method_decorator(csrf_exempt)
-    @method_decorator(login_required)
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
 
 
 
-#@login_required(login_url ='/login/')
+@login_required
 def moderator_view(request):
     return render(request, 'profile/profile-moderator.html')
+
+
+
+
+
+#class teacherView(TemplateView):
+    #template_name = 'profile/profile-teacher.html'
+
+ #def get(self,request,*args,**kwargs):
+        #if request.user.is_authenticated:
+            #return render(self.template_name)
+        #else:
+            #return redirect('account/login.html')
