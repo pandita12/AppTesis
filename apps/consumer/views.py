@@ -1,7 +1,7 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth import get_user_model
-from django.contrib.auth import authenticate, login 
+from django.contrib.auth import authenticate, login, logout 
 from django.contrib.auth.forms import UserCreationForm
 from django.views.generic import TemplateView
 from django.contrib.auth.models import User
@@ -55,9 +55,17 @@ def login_view(request):
     return render(request, 'account/login.html', {'form': form, 'msg': msg})
 
 
+@login_required
+def logout_view(request):
+    logout(request)
+    messages.success(request, F" Sesión cerrada exitosamente")
+    return redirect('/login/')
 
+
+@login_required
 def home_index(request):
     return render(request, 'account/homepage.html')
+
 
 def base_view(request):
     return render(request, 'base/base.html')
@@ -67,11 +75,7 @@ def base_view(request):
 @login_required
 def student_view(request):
     return render(request, 'profile/profile-students.html')
-
-
-
-#def teacher_view(request):
-    #return render(request, 'profile/profile-teacher.html')
+ 
 
 
 class TeacherView(LoginRequiredMixin,TemplateView):
@@ -89,13 +93,3 @@ def moderator_view(request):
 
 
 
-
-
-#class teacherView(TemplateView):
-    #template_name = 'profile/profile-teacher.html'
-
- #def get(self,request,*args,**kwargs):
-        #if request.user.is_authenticated:
-            #return render(self.template_name)
-        #else:
-            #return redirect('account/login.html')
