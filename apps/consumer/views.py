@@ -71,11 +71,12 @@ def base_view(request):
     return render(request, 'base/base.html')
 
 
-    
-@login_required
-def student_view(request):
-    return render(request, 'profile/profile-students.html')
- 
+
+class StudentView(LoginRequiredMixin,TemplateView):
+    template_name = 'profile/profile-students.html'
+
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
 
 
 class TeacherView(LoginRequiredMixin,TemplateView):
@@ -86,10 +87,8 @@ class TeacherView(LoginRequiredMixin,TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
 
+class ModeratorView(LoginRequiredMixin,TemplateView):
+    template_name = 'profile/profile-moderator.html'
 
-@login_required
-def moderator_view(request):
-    return render(request, 'profile/profile-moderator.html')
-
-
-
+    def dispatch(self, request, *args, **kwargs):
+        return super().dispatch(request, *args, **kwargs)
