@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.consumer.views import home_index, register, StudentView, TeacherView, ModeratorView, login_view, base_view, logout_view
+from apps.consumer.views import home_index, register, ProfileView, login_view, base_view, logout_view
 from django.urls import include, path
 from . import views
 
@@ -10,8 +10,6 @@ urlpatterns = [
    path('login/', login_view, name='login'),
    path('logout/', logout_view, name='logout'),
    path('register/', register, name='register'),
-   path('base/', base_view, name='base'),
-   path('studentpage/', StudentView.as_view()),
-   path('teacherpage/', TeacherView.as_view()),
-   path('moderatorpage/', ModeratorView.as_view()),
+   path('Inicio/', base_view, name='Inicio'),
+   path('profile/', ProfileView.as_view(), name='profilepage'),
   ]

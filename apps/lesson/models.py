@@ -11,8 +11,6 @@ class Matter(models.Model):
 class Professor(models.Model):
     matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
     users = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
-    name_teacher = models.CharField(max_length=15)
-    first_teacher = models.CharField(max_length=15)
     category = models.CharField(max_length=12)
     department = models.CharField(max_length=12)
 
@@ -30,7 +28,6 @@ class Classroom(models.Model):
     section = models.CharField(max_length=5)
 
 class Students(models.Model):
-    record = models.CharField(max_length=7, primary_key=True)
     users = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
     matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
     classroom_id = models.ForeignKey(Classroom, null=False, blank=False, on_delete=models.CASCADE)
@@ -41,5 +38,4 @@ class Enrollment(models.Model):
     students_id = models.ForeignKey(Students, null=False, blank=False, on_delete=models.CASCADE)
     registration_date = models.DateTimeField()
     status = models.BooleanField(max_length=1)
-    name = models.CharField(max_length=15)
     

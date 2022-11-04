@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>{% block title %} Profile / My User {% endblock title %}</title>
+    <title>{% block title %} Perfil / My User {% endblock title %}</title>
 
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
@@ -48,7 +48,7 @@
 
             <!-- Nav Item - Dashboard -->
             <li class="nav-item active">
-                <a class="nav-link" href="index.html">
+                <a class="nav-link" href="{% url 'consumer:Inicio' %}">
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Inicio</span></a>
             </li>
@@ -390,6 +390,8 @@
 
     </div>
     <!-- End of Page Wrapper -->
+
+    {% endblock %}
     <!-- Scroll to Top Button-->
     <a class="scroll-to-top rounded" href="#page-top">
         <i class="fas fa-angle-up"></i>
@@ -414,7 +416,7 @@
             </div>
         </div>
     </div>
-    {% endblock %}
+
 
    <!-- Bootstrap core JavaScript-->
     <script src="{% static 'vendor/jquery/jquery.min.js' %}"></script>

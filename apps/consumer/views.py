@@ -39,13 +39,13 @@ def login_view(request):
             user = authenticate(email=email, password=password)
             if user is not None and user.is_student:
                 login(request, user)
-                return redirect('consumer:studentpage')
+                return redirect('consumer:Inicio')
             elif user is not None and user.is_teacher:
                 login(request, user)
-                return redirect('consumer:teacherpage')
+                return redirect('consumer:Inicio')
             elif user is not None and user.is_moderator:
                 login(request, user)
-                return redirect('consumer:moderatorpage')
+                return redirect('consumer:Inicio')
             else:
                 msg = ' Invalid credentials'
         else:
@@ -62,33 +62,18 @@ def logout_view(request):
     return redirect('/login/')
 
 
-@login_required
+
 def home_index(request):
     return render(request, 'account/homepage.html')
 
-
+@login_required
 def base_view(request):
     return render(request, 'base/base.html')
 
 
 
-class StudentView(LoginRequiredMixin,TemplateView):
-    template_name = 'profile/profile-students.html'
-
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-
-class TeacherView(LoginRequiredMixin,TemplateView):
-    template_name = 'profile/profile-teacher.html'
-
-
-    def dispatch(self, request, *args, **kwargs):
-        return super().dispatch(request, *args, **kwargs)
-
-
-class ModeratorView(LoginRequiredMixin,TemplateView):
-    template_name = 'profile/profile-moderator.html'
+class ProfileView(LoginRequiredMixin,TemplateView):
+    template_name = 'profile/profile.html'
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
