@@ -7,6 +7,9 @@ class Matter(models.Model):
     name_m = models.CharField(max_length=30)
     typeofmatter = models.CharField(max_length=12)
 
+    def __str__(self):
+        return self.name_m.capitalize()
+
 
 class Professor(models.Model):
     matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
@@ -15,9 +18,8 @@ class Professor(models.Model):
     department = models.CharField(max_length=12)
 
 
-    def __unicode__(self):
-        return self.name_teacher
-
+    def __str__(self):
+        return self.users.fullname()
     
 class Classroom(models.Model):
     matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
@@ -27,15 +29,19 @@ class Classroom(models.Model):
     finaldate = models.DateTimeField()
     section = models.CharField(max_length=5)
 
+    def __str__(self):
+        return "('%s') %s" % (self.section.capitalize(), self.matter_id.name_m.capitalize())
+
 class Students(models.Model):
-    users = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
+    users = models.OneToOneField(User, null=False, blank=False, related_name="student", on_delete=models.CASCADE)
     matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
     classroom_id = models.ForeignKey(Classroom, null=False, blank=False, on_delete=models.CASCADE)
     
+    def __str__(self):
+        return self.users.fullname()
 
 class Enrollment(models.Model):
-    classroom_id = models.ForeignKey(Classroom, null=False, blank=False, on_delete=models.CASCADE)
-    students_id = models.ForeignKey(Students, null=False, blank=False, on_delete=models.CASCADE)
+    classroom = models.ForeignKey(Classroom, null=False, blank=False, on_delete=models.CASCADE)
+    student = models.ForeignKey(Students, null=False, related_name="enrollment", blank=False, on_delete=models.CASCADE)
     registration_date = models.DateTimeField()
     status = models.BooleanField(max_length=1)
-    

@@ -10,9 +10,7 @@ class Evaluation(models.Model):
     support_material = models.FileField(upload_to=None, max_length=100)
     fecha_nc = models.DateTimeField()
     contents = models.FileField(upload_to=None, max_length=100)
-    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     classroom_id = models.ForeignKey(Classroom, null=False, blank=False, on_delete=models.CASCADE)
-    Professor = models.OneToOneField(Professor, null=False, blank=False, on_delete=models.CASCADE)
     config_bot_id = models.OneToOneField(Config_bot, null=False, blank=False, on_delete=models.CASCADE)
 
 

@@ -35,3 +35,7 @@ class User(AbstractUser):
         return self.email
 
 
+    def fullname(self):
+        return "%s %s" % (self.name.capitalize(), self.first_name.capitalize())
+
+

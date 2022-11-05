@@ -1,0 +1,11 @@
+{% extends "base/base_system.html"%}
+
+{% block container%}
+{% for inscription in request.user.student.enrollment.all %}
+                        <a href="{% url "lesson:detail" inscription.classroom.pk %}">
+                            ir a  esta clase
+                        </a>
+                    {%endfor%}
+{%endblock %}
+                
+               
