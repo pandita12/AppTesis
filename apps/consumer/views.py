@@ -68,7 +68,7 @@ def home_index(request):
 
 @login_required
 def base_view(request):
-    return render(request, 'home/home.html')
+    return render(request, 'base/base_system.html')
 
 
 

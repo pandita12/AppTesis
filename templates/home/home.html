@@ -1,11 +1,81 @@
 {% extends "base/base_system.html"%}
+<title>{% block title %}Materia{% endblock title %}</title>
 
 {% block container%}
-{% for inscription in request.user.student.enrollment.all %}
-                        <a href="{% url "lesson:detail" inscription.classroom.pk %}">
-                            ir a  esta clase
-                        </a>
-                    {%endfor%}
+
+<div class="text-letf">
+    <h1 class="h4 text-gray-900 mb-4"> Estudiante  {{ request.user.fullname }} </h1>
+</div>
+
+<!-- DataTales Example--> 
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Datos-Materia</h6>
+            </div>
+            {% for inscription in request.user.student.enrollment.all %}
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre</th>
+                                            <th>Departamento</th>
+                                            <th>Profesor Asignado</th>
+                                            <th>Sección</th>
+                                            <th>Periodo de clase</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Department</th>
+                                            <th>Assigned Teacher</th>
+                                            <th>Section</th>
+                                            <th>class period</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                        <tr>
+                        <td>{{ classroom.matter_id.name_m }}</td>
+                        <td>{{ classroom.professor_id.department }}</td>
+                        <td>{{ classroom.professor_id.users.fullname }}</td>
+                        <td>{{ classroom.section }}</td>
+                        <td>{{ classroom.classperiod }}</td>
+                                        </tr>
+
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                
+                                        </tr>
+                                        <tr>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+                                            <td></td>
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                {%endfor%}
+                    </div>
+
 {%endblock %}
+
+
                 
                

@@ -72,11 +72,14 @@
                     <span>Componentes</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
+
+{% for inscription in request.user.student.enrollment.all %}
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Componentes:</h6>
-                        <a class="collapse-item" href="Seccion1.html">Seccion 1</a>
-                        <a class="collapse-item" href="Seccion2.html">Seccion 2</a>
+                        <a class="collapse-item" href="{% url "lesson:detail" inscription.classroom.pk %}">Materia</a>
                     </div>
+{%endfor%}
+
                 </div>
             </li>
 

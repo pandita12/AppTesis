@@ -8,4 +8,5 @@ app_name = 'lesson'
 urlpatterns = [
    path('index/', index_lesson),
    path('<pk>/detail/', detail_lesson, name="detail"),
+   #path('materia/',materia_view, name="materia")
 ]
