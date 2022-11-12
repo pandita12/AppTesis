@@ -1,4 +1,5 @@
 from django.contrib import admin
+from django.contrib.auth import views as auth_views
 from apps.consumer.views import home_index, register, ProfileView, login_view, base_view, logout_view
 from django.urls import include, path
 from . import views
@@ -12,4 +13,7 @@ urlpatterns = [
    path('register/', register, name='register'),
    path('Inicio/', base_view, name='Inicio'),
    path('profile/', ProfileView.as_view(), name='profilepage'),
+
+
+
   ]

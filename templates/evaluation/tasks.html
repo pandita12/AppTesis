@@ -1,0 +1,42 @@
+{% extends "base/base_system.html"%}
+<title>{% block title %}Asignaciones{% endblock title %}</title>
+{% block container%}
+
+	<div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Datos-Evaluación</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                 <table class="table table-bordered"  width="100%" cellspacing="0">
+                 	<thead>
+                       <tr>
+                          <th>Asignación</th>
+                          <th>Materias de Apoyo</th>
+                          <th>Profesor Asignado</th>
+                          <th>Fecha</th>
+                          <th>Clase / Materia</th>
+                       </tr>
+                    </thead>
+                 	 <tbody>
+                        <tr>
+                        	<td>{{ evaluation.assignment_name }}</td>
+                        	<td><a href="#">{{ evaluation.support_material }}</a></td>
+                <td>{{ evaluation.classroom_id.professor_id.users.fullname }}</td>
+                        	<td>{{ evaluation.fecha_nc }}</td>
+                        	<td>{{ evaluation.classroom_id }}</td>
+                        </tr>
+                     </tbody>
+                 </table>
+                 <div class="card" style="width: 18rem;">
+  					<div class="card-body">
+    					<h5 class="card-title">Titulo de La Evaluacion</h5>
+    						<p class="card-text">Evaluacion por Entregar.</p>
+    					<a href="#" class="btn btn-primary">Entrega</a>
+  					</div>
+				</div>
+				</div>
+            </div>
+	 	</div>
+
+{%endblock %}

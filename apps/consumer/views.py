@@ -60,7 +60,7 @@ def logout_view(request):
     logout(request)
     messages.success(request, F" Sesión cerrada exitosamente")
     return redirect('/login/')
-
+    
 
 
 def home_index(request):

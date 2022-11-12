@@ -69,17 +69,16 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseTwo"
                     aria-expanded="true" aria-controls="collapseTwo">
                     <i class="fas fa-fw fa-cog"></i>
-                    <span>Componentes</span>
+                    <span>Materia</span>
                 </a>
                 <div id="collapseTwo" class="collapse" aria-labelledby="headingTwo" data-parent="#accordionSidebar">
 
 {% for inscription in request.user.student.enrollment.all %}
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Componentes:</h6>
+                        <h6 class="collapse-header">Materia Inscrita:</h6>
                         <a class="collapse-item" href="{% url "lesson:detail" inscription.classroom.pk %}">Materia</a>
                     </div>
 {%endfor%}
-
                 </div>
             </li>
 
@@ -88,16 +87,16 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseUtilities"
                     aria-expanded="true" aria-controls="collapseUtilities">
                     <i class="fas fa-fw fa-wrench"></i>
-                    <span>Utiles</span>
+                    <span>Asignaciones</span>
                 </a>
                 <div id="collapseUtilities" class="collapse" aria-labelledby="headingUtilities"
                     data-parent="#accordionSidebar">
+
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Componentes:</h6>
-                        <a class="collapse-item" href="Seccion3.html">Seccion 3</a>
+                        <h6 class="collapse-header">Asignación:</h6>
+                        <a class="collapse-item" href="#">Seccion 3</a>
                         <a class="collapse-item" href="Seccion4.html">Seccion 4</a>
-                        <a class="collapse-item" href="Seccion5.html">Seccion 5</a>
-                        <a class="collapse-item" href="Seccion6.html">Seccion 6</a>
+            
                     </div>
                 </div>
             </li>
@@ -107,7 +106,7 @@
 
             <!-- Heading -->
             <div class="sidebar-heading">
-                Complementos
+                Acciones de Usuario
             </div>
 
             <!-- Nav Item - Pages Collapse Menu -->
@@ -115,12 +114,12 @@
                 <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapsePages"
                     aria-expanded="true" aria-controls="collapsePages">
                     <i class="fas fa-fw fa-folder"></i>
-                    <span>Pages</span>
+                    <span>Seguridad</span>
                 </a>
                 <div id="collapsePages" class="collapse" aria-labelledby="headingPages" data-parent="#accordionSidebar">
                     <div class="bg-white py-2 collapse-inner rounded">
-                        <h6 class="collapse-header">Sessiones</h6>
-                        <a class="collapse-item" href="forgot-password.html">Recuperar Contraseña</a>
+                        <h6 class="collapse-header">Modulo</h6>
+                        <a class="collapse-item" href="#">Recuperar Contraseña</a>
                     </div>
                 </div>
             </li>
@@ -152,6 +151,9 @@
              <!-- /.container-fluid -->
                 <div>
                     {% block container%}
+                    <div class="text-letf">
+                        <h1 class="h4 text-gray-900 mb-4"> Bienvenido  {{ request.user.fullname }} </h1>
+                    </div>
                     {% endblock %}
                     
                 </div>

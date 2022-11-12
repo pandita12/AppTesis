@@ -7,9 +7,8 @@ from apps.teacherbot.models import Config_bot
 
 class Evaluation(models.Model):
     assignment_name = models.CharField(max_length=25)
-    support_material = models.FileField(upload_to=None, max_length=100)
+    support_material = models.FileField(upload_to="material", max_length=100)
     fecha_nc = models.DateTimeField()
-    contents = models.FileField(upload_to=None, max_length=100)
     classroom_id = models.ForeignKey(Classroom, null=False, blank=False, on_delete=models.CASCADE)
     config_bot_id = models.OneToOneField(Config_bot, null=False, blank=False, on_delete=models.CASCADE)
 

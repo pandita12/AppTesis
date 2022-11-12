@@ -14,7 +14,6 @@ class Matter(models.Model):
 class Professor(models.Model):
     matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
     users = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
-    category = models.CharField(max_length=12)
     department = models.CharField(max_length=12)
 
 
