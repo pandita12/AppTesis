@@ -79,6 +79,13 @@
                         <a class="collapse-item" href="{% url "lesson:detail" inscription.classroom.pk %}">Materia</a>
                     </div>
 {%endfor%}
+{% for classroom in request.user.professor.classroom.all %}
+                <div class="bg-white py-2 collapse-inner rounded">
+                <h6 class="collapse-header">Materia Asignada:</h6>
+            <a class="collapse-item" href="{% url "lesson:classroom_index" classroom.pk %}">{{ classroom.matter_id.name_m }}</a>
+                    </div>
+{%endfor%}
+
                 </div>
             </li>
 

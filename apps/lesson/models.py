@@ -1,5 +1,7 @@
 from django.db import models
 from apps.consumer.models import User
+from django.utils import timezone
+
 # Create your models here.
 
 class Matter(models.Model):
@@ -12,8 +14,7 @@ class Matter(models.Model):
 
 
 class Professor(models.Model):
-    matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
-    users = models.OneToOneField(User, null=False, blank=False, on_delete=models.CASCADE)
+    users = models.OneToOneField(User, null=False, blank=False, related_name="professor", on_delete=models.CASCADE)
     department = models.CharField(max_length=12)
 
 
@@ -22,7 +23,7 @@ class Professor(models.Model):
     
 class Classroom(models.Model):
     matter_id = models.ForeignKey(Matter, null=False, blank=False, on_delete=models.CASCADE)
-    professor_id = models.ForeignKey(Professor, null=False, blank=False, on_delete=models.CASCADE)
+    professor_id = models.ForeignKey(Professor,related_name="classroom", null=False, blank=False, on_delete=models.CASCADE)
     classperiod = models.DateTimeField(default=False)
     stardate = models.DateTimeField()
     finaldate = models.DateTimeField()
@@ -30,6 +31,11 @@ class Classroom(models.Model):
 
     def __str__(self):
         return "('%s') %s" % (self.section.capitalize(), self.matter_id.name_m.capitalize())
+
+    def endings_evaluation(self):
+        return self.evaluation.filter(date_finish__lte=timezone.now())
+    def pendings_evaluation(self):
+        return self.evaluation.filter(date_finish__gte=timezone.now())
 
 class Students(models.Model):
     users = models.OneToOneField(User, null=False, blank=False, related_name="student", on_delete=models.CASCADE)

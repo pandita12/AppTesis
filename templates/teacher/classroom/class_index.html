@@ -1,0 +1,80 @@
+{% extends "base/base_system.html"%}
+<title>{% block title %} Classroom detail {% endblock title %}</title>
+{% block container%}
+
+     <div class="card sm-2">
+        <div class="card-body">
+         <a href="{% url 'evaluation:create-evaluation' %}"><button class="btn btn-outline-primary">Crear Evaluación</button></a>
+        </div>
+        <center><h4 class="m-0 font-weight-bold text-primary">Tabla Informativa de Evaluaciones</h4></center>
+        <br>
+    </div>
+
+	<div class="card shadow mb-6">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Evaluaciones pendientes</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                 <table class="table table-bordered"  width="100%" cellspacing="0">
+                 	<thead>
+                       <tr>
+                          <th>Evaluación</th>
+                          <th>Fecha Inicio</th>
+                          <th>Fecha Fin</th>
+                          <th>Total Entregados</th>
+                          <th>Status</th>
+                       </tr>
+                    </thead>
+                 	 <tbody>
+                        {%for pending in classroom.pendings_evaluation %}
+                        <tr>
+                            <td>{{ pending.assignment_name }}</td>
+                            <td>{{ pending.date_start  }}</td>
+                            <td>{{ pending.date_finish  }}</td>
+                            <td></td>
+                            <td>{%if pending.if_ending %}Activo{%endif%}</td>
+                        </tr>
+
+                        {%endfor%}
+                     </tbody>
+                 </table>
+				</div>
+            </div>
+        </div>
+        <br>
+        <br>
+    <div class="card shadow mb-6">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Evaluaciones culminadas</h6>
+            </div>
+            <div class="card-body">
+                <div class="table-responsive">
+                 <table class="table table-bordered"  width="100%" cellspacing="0">
+                    <thead>
+                       <tr>
+                          <th>Evaluación</th>
+                          <th>Fecha Inicio</th>
+                          <th>Fecha Fin</th>
+                          <th>Total Entregados</th>
+                          <th>Status</th>
+                       </tr>
+                    </thead>
+                     <tbody>
+                        {%for ending in classroom.endings_evaluation %}
+                        <tr>
+                            <td>{{ ending.assignment_name }}</td>
+                            <td>{{ ending.date_start  }}</td>
+                            <td>{{ ending.date_finish  }}</td>
+                            <td></td>
+                            <td>{%if not ending.if_ending %}Culminado{%endif%}</td>
+                        </tr>
+
+                        {%endfor%}
+                     </tbody>
+                 </table>
+                </div>
+            </div>
+	 	</div>
+
+{%endblock %}

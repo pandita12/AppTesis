@@ -11,3 +11,7 @@ def asig_view(request, pk):
 	}
 
 	return render(request, 'evaluation/tasks.html', context)
+
+
+def create_view(request):
+    return render(request, 'evaluation/create-evaluation.html')
