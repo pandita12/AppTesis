@@ -4,14 +4,19 @@ from django.http import HttpResponse
 from apps.evaluation.models import Evaluation, Delivery
 # Create your views here.
 
-def asig_view(request, pk):
-	ueryevaluation = Evaluation.objects.get(pk=1)
-	context = {
-		"evaluation": ueryevaluation
-	}
-
-	return render(request, 'evaluation/tasks.html', context)
+def asig_view(request):
+	return render(request, 'evaluation/tasks.html')
 
 
 def create_view(request):
     return render(request, 'evaluation/create-evaluation.html')
+
+
+def evaluate_view(request):
+	return render(request, 'evaluation/evaluate.html')
+
+def result_evaluation_view(request):
+	return render(request, 'evaluation/result_evaluacion.html')
+
+def create_task_view(request):
+	return render(request, 'evaluation/create-task.html')
