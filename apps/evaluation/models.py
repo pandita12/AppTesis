@@ -8,11 +8,10 @@ from django.utils import timezone
 
 class Evaluation(models.Model):
     assignment_name = models.CharField(max_length=25)
-    support_material = models.FileField(upload_to="material", max_length=100)
+    support_material = models.FileField(upload_to="material", max_length=100, null=True)
     date_start = models.DateTimeField()
     date_finish = models.DateTimeField()
     classroom_id = models.ForeignKey(Classroom, related_name='evaluation', null=False, blank=False, on_delete=models.CASCADE)
-    config_bot_id = models.OneToOneField(Config_bot, null=False, blank=False, on_delete=models.CASCADE)
 
     def if_ending(self):
         return self.date_finish > timezone.now()

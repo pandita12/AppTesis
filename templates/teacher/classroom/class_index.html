@@ -4,7 +4,8 @@
 
      <div class="card sm-2">
         <div class="card-body">
-         <a href="{% url 'evaluation:create-evaluation' %}"><button class="btn btn-outline-primary">Crear Evaluación</button></a>
+
+         <a href="{% url 'evaluation:create-evaluation' classroom.pk %}"><button class="btn btn-outline-primary">Crear Evaluación</button></a>
         </div>
         <center><h4 class="m-0 font-weight-bold text-primary">Tabla Informativa de Evaluaciones</h4></center>
         <br>
@@ -24,6 +25,7 @@
                           <th>Fecha Fin</th>
                           <th>Total Entregados</th>
                           <th>Status</th>
+                          <th></th>
                        </tr>
                     </thead>
                  	 <tbody>
@@ -34,6 +36,7 @@
                             <td>{{ pending.date_finish  }}</td>
                             <td></td>
                             <td>{%if pending.if_ending %}Activo{%endif%}</td>
+                            <td><a href="{% url 'evaluation:evaluate' pending.classroom_id.pk %}"><i class=" fa fa-search-plus fa-2x"></i></a></td>
                         </tr>
 
                         {%endfor%}

@@ -29,4 +29,4 @@ def classroom_index(request, pk):
 
 	return render(request, 'teacher/classroom/class_index.html', context)
 
-
+ 
