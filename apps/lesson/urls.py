@@ -7,6 +7,10 @@ app_name = 'lesson'
 
 urlpatterns = [
    path('index/', index_lesson),
+
+   #Urls Estudiantes
    path('<pk>/detail/', detail_lesson, name="detail"),
+
+   #Urls Profesores
    path('<pk>/classroom/detail/',classroom_index, name="classroom_index"),
 ]

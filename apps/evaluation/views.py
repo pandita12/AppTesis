@@ -36,7 +36,7 @@ def evaluate_view(request, pk):
 	context = {
 		"deliverys":deliverys
 	}
-	return render(request, 'evaluation/evaluate.html', context)
+	return render(request, 'evaluation/check-resultado/check-resultado.html', context)
 
 def result_evaluation_view(request):
 	return render(request, 'evaluation/result_evaluacion.html')

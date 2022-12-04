@@ -1,0 +1,224 @@
+{% extends "base/base_system.html"%}
+<title>{% block title %} Evaluation - Result {% endblock title %}</title>
+
+{% block container%}
+<div class="card-body">
+      <center><h3 class="h3 sm-2">Evaluaciones</h3></center>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+    	<div class="card-body">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Usuario</span></th>
+                                <th class="text-center"><span>Enviado</span></th>
+                                <th class="text-center"><span>Status</span></th>
+                                <th class="text-center"><span>Email</span></th>
+                                <th class="text-center">&nbsp; Botones Evaluativos</th>
+                                 <th><span>Pendiente por revisar</span></th>
+                                </tr>
+                            </thead>
+                           <tbody>
+                                {%for delivery in deliverys%}
+                               <tr>
+                                   <td>
+                                       {{ delivery.user.fullname }}
+                                   </td>
+                                   <td>
+                                       {{ delivery.deliver_date }}
+                                   </td>
+                                   <td></td>
+                                   <td>
+                                       {{ delivery.user.email }}
+                                   </td>
+                                   <!--Botones para correciones de evaluaciones-->
+                                   <td>
+                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter1"><strong> Bajar </strong> <i class="fa fa-download"></i></a>
+                            <a href="#" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#exampleModalCenter2"><strong>Objeción</strong> <i class="fa fa-question"></i></a>
+                            <a href="#" class="btn btn-success btn-sm" data-toggle="modal" data-target="#exampleModalCenter3"><strong>Corregir</strong> <i class="fa fa-check"></i></a>
+                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter4"><strong>Eliminar</strong> <i class="fa fa-trash-o"></i></a>
+                                   </td>
+                                   <!-- EndBoton-->
+                                   <td>
+                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label fa fa-bell" for="defaultCheck1">
+                                         Notificar Revisión
+                                    </label>
+                             </div>
+                                   </td>
+                               </tr>
+                               {%endfor%}
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Modal Donwload(1) -->
+       <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Descargar Asignación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Descargar</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- EndModal-->
+
+     <!-- Modal Donwload(2) -->
+  <div class="modal fade" id="exampleModalCenter2" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Colocar Observación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 ml-auto"><form>
+  <div class="form-group row">
+    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <div class="col-sm-10">
+      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Example select</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>1</option>
+      <option>2</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+</form>
+</div>
+    </div>
+  </div>
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-primary">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EndModal-->
+
+<!-- Modal Donwload(3) -->
+  <div class="modal fade" id="exampleModalCenter3" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Corregir Asignación </h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-12 ml-auto"><form>
+  <div class="form-group row">
+    <label for="staticEmail" class="col-md-8 col-form-label">Nombre del Evaluado</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Name">
+    </div>
+  </div>
+  <div class="form-group row">
+    <label for="staticEmail" class="col-md-8 col-form-label">Profesor asignado</label>
+    <div class="col-sm-10">
+      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Name">
+    </div>
+  </div>
+  <div class="form-group">
+    <label for="exampleFormControlSelect1">Nivel de Satisfacción</label>
+    <select class="form-control" id="exampleFormControlSelect1">
+      <option>Incompleto</option>
+      <option>Regular</option>
+      <option>Aceptable</option>
+      <option>Excelente</option>
+    </select>
+  </div>
+  <div class="form-group">
+    <h6 class="text-center">Selección Evaluativa</h6>
+      <div class="form-check col-sm-2">
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck2">
+        <label class="form-check-label" for="defaultCheck1"> Reprobado</label> 
+
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
+        <label class="form-check-label" for="defaultCheck1"> Aprobado</label>
+
+        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
+        <label class="form-check-label" for="defaultCheck1"> Perfecto</label>
+      </div>
+    </div>
+     <div class="form-group">
+    <label for="exampleFormControlTextarea1">Observación (Comentario)</label>
+    <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+  </div>
+</form>
+</div>
+    </div>
+  </div>
+</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-success">Guardar</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!-- EndModal-->
+
+<!-- Modal Donwload(4) -->
+       <div class="modal fade" id="exampleModalCenter4" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLongTitle">Elimnar Asignación</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        Estas seguro de eliminar la asignación ?    </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
+        <button type="button" class="btn btn-danger">Eliminar</button>
+      </div>
+    </div>
+  </div>
+</div>
+        <!-- EndModal-->
+
+    </div>
+</div>
+{%endblock%}
