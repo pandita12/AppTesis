@@ -8,8 +8,8 @@ from django.urls import reverse
 from apps.lesson.models import Classroom
 # Create your views here.
 
-def asig_view(request):
-	return render(request, 'evaluation/tasks.html')
+def asignament_view(request):
+	return render(request, 'evaluation/asignament/assignament.html')
 
 
 class EvaluationView(View):
@@ -41,5 +41,5 @@ def evaluate_view(request, pk):
 def result_evaluation_view(request):
 	return render(request, 'evaluation/result_evaluacion.html')
 
-def create_task_view(request):
-	return render(request, 'evaluation/create-task.html')
+def send_task_view(request):
+	return render(request, 'evaluation/send-task/send-task.html')

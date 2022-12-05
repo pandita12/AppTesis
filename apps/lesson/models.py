@@ -50,3 +50,4 @@ class Enrollment(models.Model):
     student = models.ForeignKey(Students, null=False, related_name="enrollment", blank=False, on_delete=models.CASCADE)
     registration_date = models.DateTimeField()
     status = models.BooleanField(max_length=1)
+    semester_period = models.CharField(max_length=6, null=True)

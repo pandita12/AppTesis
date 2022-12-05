@@ -105,6 +105,14 @@
             <a class="collapse-item" href="{% url "evaluation:create-evaluation" classroom.pk %}">Crear Asignación</a>
                     </div>
 {%endfor%}
+{% for classroom in request.user.student.enrollment.all %}     
+                    <div class="bg-white py-2 collapse-inner rounded">
+                        <h6 class="collapse-header">Asignaciones:</h6>
+                    <a class="collapse-item" href="{% url 'evaluation:asignament' %}">Asignación</a>
+                        <a class="collapse-item" href="{% url 'evaluation:result_evaluacion' %}">Resultado Evaluativos</a>
+                    </div>
+{%endfor%}
+
 
                 </div>
             </li>

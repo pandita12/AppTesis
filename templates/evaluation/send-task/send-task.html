@@ -1,5 +1,5 @@
 {% extends "base/base_system.html"%}
-<title>{% block title %}Create - task {% endblock title %}</title>
+<title>{% block title %}Enviar Asignación {% endblock title %}</title>
 {% block container%}
 <div class="card-body">
           <center><h3 class="h3 sm-2">Enviar Asignación</h3></center>
@@ -10,11 +10,11 @@
     <form class="form-horizontal">
       <div class="panel panel-default">
         <div class="panel-heading">
-        <h4 class="panel-title">User info</h4>
+        <h4 class="panel-title">Titulo Evaluativo</h4>
         </div>
         <div class="panel-body">
           <div class="form-group">
-            <label class="col-sm-2 control-label">Company name</label>
+            <label class="col-sm-4 control-label">Nombre de la Asignación</label>
             <div class="col-sm-10">
               <input type="text" class="form-control">
             </div>
@@ -25,27 +25,21 @@
       <div class="panel panel-default">
         <div class="panel-body">
           <div class="form-group">
-            <label class="col-sm-2 control-label">Archivo</label>
+            <label class="col-sm-2 control-label">Documento</label>
             <div class="col-sm-10">
               <input type="file" class="form-control">
             </div>
           </div>
           <div class="form-group">
-            <label class="col-sm-2 control-label">E-mail address</label>
-            <div class="col-sm-10">
-              <input type="email" class="form-control">
-            </div>
-          </div>
-          <div class="form-group">
-            <label class="col-sm-2 control-label">Work address</label>
+            <label class="col-sm-4 control-label">Observación (Comentario)</label>
             <div class="col-sm-10">
               <textarea rows="3" class="form-control"></textarea>
             </div>
           </div>
           <div class="form-group">
             <div class="col-sm-10 col-sm-offset-2">
-              <button type="submit" class="btn btn-primary">Enviar</button>
-              <button type="reset" class="btn btn-default">Cancelar</button>
+              <button type="submit" class="btn btn-success">Enviar</button>
+              <button type="reset" class="btn btn-danger">Cancelar</button>
             </div>
           </div>
         </div>

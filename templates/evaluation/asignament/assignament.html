@@ -1,0 +1,55 @@
+{% extends "base/base_system.html"%}
+<title>{% block title %} Asignaciones {% endblock title %}</title>
+
+{% block container%}
+<div class="card-body">
+      <center><h3 class="h3 sm-2">Evaluaciones</h3></center>
+</div>
+<div class="row">
+    <div class="col-lg-12">
+        <div class="card-body">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Asignación</span></th>
+                                <th ><span>Material de apoyo</span></th>
+                                <th ><span>Docente</span></th>
+                                 <th ><span>Tema</span></th>
+                                <th >&nbsp; Botones Evaluativos</th>
+                                </tr>
+                            </thead>
+                           <tbody>
+
+                               <tr>
+                                   <td>
+                                       none
+                                   </td>
+                                   <td>
+                                       none
+                                   </td>
+                                   <td>
+                                        none
+                                   </td>
+                    
+                                   <td>
+                                        none
+                                   </td>
+                                   <td>
+                                    <a href="{% url 'evaluation:send-task' %}" class="btn btn-success btn-sm"><strong> Enviar Asignación </strong> <i class="fa fa-download"></i></a>
+                                   </td>
+                                   <!-- EndBoton-->
+                               </tr>
+                               
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+       
+    </div>
+</div>
+{%endblock%}
