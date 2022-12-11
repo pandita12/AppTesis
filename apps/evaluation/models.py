@@ -1,5 +1,5 @@
 from django.db import models
-
+from django.utils.translation import gettext_lazy as _
 from apps.consumer.models import User
 from apps.lesson.models import Classroom, Professor
 from apps.teacherbot.models import Config_bot
@@ -18,8 +18,33 @@ class Evaluation(models.Model):
 
 
 class Delivery(models.Model):
+
+    GENDER_CHOICES = [
+        ('D', _('Delivered')),
+        ('U', _('Undelivered'))
+    ]
+
     deliver_date = models.DateTimeField()
+    task_upload = models.FileField(upload_to="taskupload/", max_length=100, null=True, blank=True)
+    status_delivery = models.CharField(max_length=1, choices=GENDER_CHOICES, default='D') 
     status_notifications = models.BooleanField(max_length=1)
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     evaluation_id = models.ForeignKey(Evaluation, null=False, blank=False, on_delete=models.CASCADE)
 
+
+class Config_Delivery_Rest(models.Model):
+    delivery = models.ForeignKey(Delivery, null=False, blank=False, on_delete=models.CASCADE)
+    min_aprobed = models.FloatField('reprobate')
+    max_aprobed = models.FloatField('approved')
+
+    def ponderation_min(self):
+        return self.min_aprobed ('<=5').self("reprobate")
+
+    def ponderation_max(self):
+        return self.max_aprobed ('>=5.5').self("approved")
+
+
+class Delivery_Rest(models.Model):
+    config_delivery = models.ForeignKey(Config_Delivery_Rest, null=False, blank=False, on_delete=models.CASCADE)
+    is_reprobate = models.BooleanField( 'ponderation reprobate', default=True)
+    is_approved = models.BooleanField('ponderation approved', default=False) 

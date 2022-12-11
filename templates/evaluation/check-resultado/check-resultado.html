@@ -31,7 +31,13 @@
                                    <td>
                                        {{ delivery.deliver_date }}
                                    </td>
-                                   <td></td>
+                                   <td>
+                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                                      <option selected>Estado</option>
+                                      <option value="1">{{ delivery.status_delivery }}</option>
+                                      <option value="2">U</option>
+                                    </select>
+                                   </td>
                                    <td>
                                        {{ delivery.user.email }}
                                    </td>
@@ -92,36 +98,39 @@
         </button>
       </div>
       <div class="modal-body">
+  {%for delivery in deliverys%}
   <div class="container-fluid">
     <div class="row">
       <div class="col-md-12 ml-auto"><form>
   <div class="form-group row">
-    <label for="staticEmail" class="col-sm-2 col-form-label">Email</label>
+    <label for="staticEmail" class="col-md-8 col-form-label">Profesor</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="email@example.com">
+      {{ request.user.fullname }}
     </div>
   </div>
   <div class="form-group row">
-    <label for="inputPassword" class="col-sm-2 col-form-label">Password</label>
+    <label for="staticEmail" class="col-md-8 col-form-label">Nombre del Evaluado</label>
     <div class="col-sm-10">
-      <input type="password" class="form-control" id="inputPassword" placeholder="Password">
+     {{ delivery.user.fullname }}
     </div>
   </div>
   <div class="form-group">
-    <label for="exampleFormControlSelect1">Example select</label>
+    <label for="exampleFormControlSelect1">Nivel de desaprobación </label>
     <select class="form-control" id="exampleFormControlSelect1">
-      <option>1</option>
-      <option>2</option>
+      <option>No entregado</option>
+      <option>Falta contenido</option>
+      <option>Sin sentido Logico</option>
     </select>
   </div>
   <div class="form-group">
-    <label for="exampleFormControlTextarea1">Example textarea</label>
+    <label for="exampleFormControlTextarea1">Comentario Observativo</label>
     <textarea class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
   </div>
 </form>
 </div>
     </div>
   </div>
+  {%endfor%}
 </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
@@ -145,24 +154,27 @@
       <div class="modal-body">
   <div class="container-fluid">
     <div class="row">
-      <div class="col-md-12 ml-auto"><form>
+      <div class="col-md-12 ml-auto">
+{%for delivery in deliverys%}
+      <form>
   <div class="form-group row">
     <label for="staticEmail" class="col-md-8 col-form-label">Nombre del Evaluado</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Name">
+     {{ delivery.user.fullname }}
     </div>
   </div>
+{%endfor%}
   <div class="form-group row">
     <label for="staticEmail" class="col-md-8 col-form-label">Profesor asignado</label>
     <div class="col-sm-10">
-      <input type="text" readonly class="form-control-plaintext" id="staticEmail" value="Name">
+      {{ request.user.fullname }}
     </div>
   </div>
+  <br>
   <div class="form-group">
     <label for="exampleFormControlSelect1">Nivel de Satisfacción</label>
     <select class="form-control" id="exampleFormControlSelect1">
       <option>Incompleto</option>
-      <option>Regular</option>
       <option>Aceptable</option>
       <option>Excelente</option>
     </select>
@@ -175,9 +187,6 @@
 
         <input class="form-check-input" type="checkbox" value="" id="defaultCheck3">
         <label class="form-check-label" for="defaultCheck1"> Aprobado</label>
-
-        <input class="form-check-input" type="checkbox" value="" id="defaultCheck4">
-        <label class="form-check-label" for="defaultCheck1"> Perfecto</label>
       </div>
     </div>
      <div class="form-group">

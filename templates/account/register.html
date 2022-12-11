@@ -42,26 +42,22 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
-                        <div class="row-center">
+                        
                             <div class="p-5">
                                 <div class="text-center">
-                                    <h1 class="h4 text-gray-900 mb-4">¡Register!</h1>
+                                    <h1 class="h4 text-gray-900 mb-4">Registrate!</h1>
                                 </div>
                         <form method="POST" class="form-group">
                                 {% csrf_token %}
                                 <!-- Sección de formulario datos (Nombre / Apellido / Cedula) -->
 
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-8">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                     <label for="name" name="name">Nombre</label>
                                     {{ form.name }}
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+        
                                 <div class="form-group">
                                     <label for="first_name" name="first_name">Apellido</label>
                                     {{ form.first_name }}
@@ -69,19 +65,13 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+                         <div class="col-lg-12">
+                            <div class="col-sm-2">
                                 <div class="form-group">
                                     <label for="dni" name="dni">Cedula</label>
                                     {{ form.dni }}
                                 </div>
-                            </div>
-                        </div>
-                                <!-- Cierre de Sección de datos -->
-                            <!-- Sección de formulario datos(Direccion / Telefono / Correo) -->
-
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+                        
                                 <div class="form-group">
                                     <label for="direction" name="direction">Dirección</label>
                                     {{ form.direction }}
@@ -89,17 +79,13 @@
                             </div>
                         </div>
 
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+                         <div class="col-md-8">
+                            <div class="col-sm-4">
                                 <div class="form-group">
                                    <label for="phone" name="phone">Telefono</label>
                                     {{ form.phone }}
                                 </div>
-                            </div>
-                        </div>
-
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+    
                                 <div class="form-group">
                                    <label for="email" name="email">Correo</label>
                                     {{ form.email }}
@@ -108,20 +94,14 @@
                         </div>
                             <!-- Cierre de Sección de datos -->
                         <!-- Sección de formulario(Contraseña / Confirmacion de Contraseña) -->
-
-                         <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
+                        <div class="col-md-8">
+                            <div class="col-sm-4">
                                 <div class="form-group">
-                                   <label for="password1" name="password1">Contraseña</label>
+                                <label for="password1" name="password1">Contraseña</label>
                                     {{ form.password1 }}
                                 </div>
-                            </div>
-                        </div>
-
-
-                        <div class="row">
-                            <div class="col-md-8 col-md-offset-2">
-                                <div class="form-group">
+                        
+                            <div class="form-group">
                                 <label for="password2" name="password2">Confirmar Contraseña</label>
                                     {{ form.password2 }}
                                 </div>
@@ -129,7 +109,8 @@
                         </div>
                              <!-- Cierre de Sección de datos -->
                         <!-- Sección de Seleccion de tipo de usuario default Estudiante-->
-                        <div class="row">
+                        <div class="col-sm-4">
+                            <div class="col-lg-12">
                             <div class="d-flex mb-5 align-items-center">
                                 <label class="control control--checkbox mb-0"><span class="caption">Estudiante</span>
                                     {{ form.is_student }}
@@ -151,11 +132,13 @@
                                 </label>
                             </div>
                         </div>
+                     </div>
                     <!-- Cierre de Sección de tipo de usuario -->
                     <!-- Sección de Seleccion de tipo de sexo-->
-                    <div class="row">    
+                    <div class="col-sm-4">
+                        <span>Seleccione su sexo </span>    
                                     {{  form.gender }}
-                        </div>
+                    </div>
                         <br>
                         <br>
                         <!-- Cierre de Sección de tipo de sexo -->       
@@ -166,7 +149,7 @@
                                     <a class="small" href="{% url 'consumer:login' %}">¿Ya tienes una cuenta? Iniciar Session.</a>
                                 </div>
                             </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
