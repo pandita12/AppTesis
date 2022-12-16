@@ -45,30 +45,31 @@
                 <div class="card o-hidden border-0 shadow-lg my-5">
                     <div class="card-body p-0">
                         <br>
+                        <div class="container text-center">
                         <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">¡Bienvenido!</h1>
+                                <h4 class="h2 text-gray-900 mb-4">¡Bienvenido!</h4>
                         </div>
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                               <div class="card-body">
+                    <div class="row">
+                        <div class="col-sm-5 col-md-6">
                                <center>   
                                <h4><p><strong> Iniciar sesión.</strong></p></h4></center><a href="{% url 'consumer:login' %}" class="btn btn-facebook btn-block">Iniciar sesion</a>
-                            
-                                    <br>
+                               
+                         </div>
+                         <div class="col-sm-5 offset-sm-2 col-md-6 offset-md-0">
                                 <center>   
                             <h4><p><strong>Registrate</strong></p></h4></center>
                                 <a href="{% url 'consumer:register' %}" class="btn btn-facebook btn-block">Registro</a>
-                                </div>
-                                
+                            </div>   
+
                         </div>
-                        <br>
+                        <div >
+                                <img src="{% static 'img/logo.png' %}">
+                             </div> 
                     </div>
                 </div>
-
             </div>
-
         </div>
-
     </div>
 
     {% endblock %}

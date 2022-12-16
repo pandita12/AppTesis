@@ -9,6 +9,7 @@ from django.views.decorators.csrf import csrf_protect,csrf_exempt
 from django.http import HttpResponse
 from django.contrib import messages
 from .forms import RegisterForm, LoginForm
+from .send_mail import SendMail
 from django.utils.decorators import method_decorator
 from django.contrib.auth.mixins import LoginRequiredMixin
 
@@ -77,3 +78,8 @@ class ProfileView(LoginRequiredMixin,TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         return super().dispatch(request, *args, **kwargs)
+
+
+def email_send(request):
+    send_mail = SendMail(template, context)
+    send_mail.send()
