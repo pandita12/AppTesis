@@ -80,6 +80,10 @@ class ProfileView(LoginRequiredMixin,TemplateView):
         return super().dispatch(request, *args, **kwargs)
 
 
-def email_send(request):
-    send_mail = SendMail(template, context)
+class email_send_view(TemplateView):
+    template_name = 'account/password_reset/send_mail.html'
+    context = {
+        "SendMail": SendMail
+    }
+    send_mail = SendMail('template', context)
     send_mail.send()

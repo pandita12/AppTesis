@@ -10,10 +10,10 @@
     <meta name="author" content="">
 
     <title>{% block title %} Login {% endblock title %}</title>
-
+    
     {# Placed at the top of the document so pages load faster with defer #}
     {% block javascript %}
-
+    <link rel="shortcut icon" href="{% static 'img/logo.png' %}">
     <!-- Custom fonts for this template-->
     <link href="{% static 'vendor/fontawesome-free/css/all.min.css' %}" rel="stylesheet" type="text/css">
     <link
@@ -46,7 +46,7 @@
                     <div class="card-body p-0">
                         <!-- Nested Row within Card Body -->
                         <div class="row">
-                           
+        
                             <div class="col-lg-12">
                                 <div class="p-5">
                                     <div class="text-center">
@@ -73,7 +73,7 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-    <a class="small" href="#">¿Has olvidado tu contraseña?</a>
+    <a class="small" href=" {% url 'consumer:reset-password' %}">¿Has olvidado tu contraseña?</a>
                                     </div>
                                     <div class="text-center">
                                         <a class="small" href="{% url 'consumer:register' %}">¡Crea una cuenta!</a>

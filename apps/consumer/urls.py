@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth import views as auth_views
-from apps.consumer.views import home_index, register, ProfileView, login_view, base_view, logout_view
+from apps.consumer.views import home_index, register, ProfileView, login_view, base_view, logout_view, email_send_view
 from django.urls import include, path
 from . import views
 
@@ -15,5 +15,6 @@ urlpatterns = [
    path('profile/', ProfileView.as_view(), name='profilepage'),
 
 
-
+   #Resset password email
+   path('reset-password/', email_send_view.as_view(), name='reset-password')
   ]
