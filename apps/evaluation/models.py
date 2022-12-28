@@ -30,18 +30,16 @@ class Delivery(models.Model):
     status_notifications = models.BooleanField(max_length=1)
     user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
     evaluation_id = models.ForeignKey(Evaluation, null=False, blank=False, on_delete=models.CASCADE)
+    ponderation = models.FloatField(null=True)
 
+    def is_approved(self):
+        return "approved" if self.ponderation >= self.config_delivery.min_aprobed and self.ponderation <= self.config_delivery.max_aprobed else "reprobate"
 
 class Config_Delivery_Rest(models.Model):
-    delivery = models.ForeignKey(Delivery, null=False, blank=False, on_delete=models.CASCADE)
+    delivery = models.ForeignKey(Delivery, null=False, blank=False, on_delete=models.CASCADE,
+     related_name= "config_delivery")
     min_aprobed = models.FloatField('reprobate')
     max_aprobed = models.FloatField('approved')
-
-    def ponderation_min(self):
-        return self.min_aprobed ('<=5').self("reprobate")
-
-    def ponderation_max(self):
-        return self.max_aprobed ('>=5.5').self("approved")
 
 
 class Delivery_Rest(models.Model):

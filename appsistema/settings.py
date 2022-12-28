@@ -44,6 +44,7 @@ INSTALLED_APPS = [
     'apps.lesson',
     'apps.teacherbot',
     'apps.evaluation',
+    'crispy_forms',
 
 
 ]
@@ -57,6 +58,8 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+CRISPY_TEMPLATE_PACK = 'bootstrap4'
 
 ROOT_URLCONF = 'appsistema.urls'
 
@@ -79,6 +82,8 @@ TEMPLATES = [
         },
     },
 ]
+
+
 
 WSGI_APPLICATION = 'appsistema.wsgi.application'
 
@@ -145,4 +150,4 @@ EMAIL_HOST = 'smtp.gmail.com'
 EMAIL_USE_TLS = True
 EMAIL_PORT = 587
 EMAIL_HOST_USER = 'swodorheranndez@gmail.com'
-EMAIL_HOST_PASSWORD = 'qijj epqa ewhs uehh'
+EMAIL_HOST_PASSWORD = 'qijjepqaewhsuehh'

@@ -11,7 +11,7 @@ class SendMail():
 
 	def send(self):
 		remitente = "swodorheranndez@gmail.com"
-		destinatario = " "
+		destinatario = "swodorheranndez@gmail.com"
 		mensaje = "¡Hola, mundo!"
 
 		email = EmailMessage()
@@ -21,5 +21,6 @@ class SendMail():
 		email.set_content(mensaje)
 
 		smtp = smtplib.SMTP_SSL("smtp.gmail.com")
+		smtp.login(remitente, "qijjepqaewhsuehh")
 		smtp.sendmail(remitente, destinatario, email.as_string())
 		smtp.quit()

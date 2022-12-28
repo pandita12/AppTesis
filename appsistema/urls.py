@@ -18,16 +18,16 @@ from django.urls import path, re_path, include
 from django.urls import reverse
 
 from django.urls import include, path
-from django.contrib.auth.views import PasswordResetView, PasswordResetDoneView, PasswordResetConfirmView, PasswordResetCompleteView
 from django.urls import reverse_lazy
+from django.contrib.auth import views as auth_views
+
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('apps.consumer.urls')),
-    path('consumer/', include('django.contrib.auth.urls')),
     path('lesson/', include('apps.lesson.urls')),
     path('teacherbot/', include('apps.teacherbot.urls')),
     path('evaluation/', include('apps.evaluation.urls')),
 
-
+    #Urls password reset     
 ]
