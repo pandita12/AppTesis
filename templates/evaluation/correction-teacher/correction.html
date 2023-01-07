@@ -1,0 +1,67 @@
+{% extends "base/base_system.html"%}
+<title>{% block title %}Correction - Evaluation{% endblock title %}</title>
+{% block container%}
+<div class="container-fluid">
+    <div class="row">
+      <div class="col-lg-12 ml-auto">
+    <form method="post" enctype="multipart/form-data">
+     {% if form.errors %}
+    {% for field in form %}
+        {% for error in field.errors %}
+            <p> {{ error }}</p>
+        {% endfor %}
+    {% endfor %}
+{% endif %}
+    {% csrf_token %}
+  <div class="form-group row">
+  	<div class="form-group col-md-6">
+      <label for="inputEmail4">Nombre del Evaluado</label>
+      <div class="col-sm-10">
+     {{ delivery.user.fullname }}
+    </div>
+    </div>
+  <div class="form-group col-md-6">
+      <label for="inputEmail4">Docente Asignado</label>
+    <div class="col-sm-10">
+      {{ request.user.fullname }}
+    </div>
+  </div>
+</div>
+  <br>
+  <div class="form-group">
+    <h6 class="text-center">Ponderación Evaluativa</h6>
+      <div class="form-group col-sm-2">
+      <label for="inputcorregir">Ponderación</label>
+      <input type="number" name="ponderation" class="form-control">
+    </div>
+    <small class="text-muted">
+      <span>Reprobado <strong>(0/50)</strong></span>
+      <span>Aprobado <strong>(50/100)</strong></span> 
+    </small>
+    <br>
+    <br>
+     <div class="form-group col-sm-4">
+    <h6 class="text-muted">Selección evaluativa</h6> 
+      {{ form.evaluative_selection }}
+    </div>
+    </div>
+    <br>
+    <div class="form-group col-sm-4">
+    <h6 class="text-muted">Fecha de entrega</h6>
+     <input type="date" name="deliver_date" class="form-control">
+    </div>
+     <div class="form-group">
+    <label for="exampleFormControlTextarea1">Observación (Comentario)</label>
+    <textarea class="form-control" name="evaluative_message" rows="3"></textarea>
+  </div>
+  <div class="form-group row">
+    <div class="col-md-2">
+      <button type="submit" class="btn btn-success">Corregir<i class="fa fa-check"></i></button>
+    </div>
+  </div>
+</form>
+</div>
+    </div>
+  </div>
+
+{% endblock%}

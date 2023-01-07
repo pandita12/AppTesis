@@ -2,7 +2,7 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse
 from apps.evaluation.models import Evaluation, Delivery
-from .forms import CreateEvaluationForm
+from .forms import CreateEvaluationForm, ObservationForm, PonderationForm
 from django.views import View
 from django.urls import reverse
 from apps.lesson.models import Classroom
@@ -43,3 +43,44 @@ def result_evaluation_view(request):
 
 def send_task_view(request):
 	return render(request, 'evaluation/send-task/send-task.html')
+
+class ObservationView(View):
+	def get(self,request, *args, **kwargs):
+		context = {
+			"form":ObservationForm
+		}
+		return render(request, 'evaluation/correction-teacher/correction.html', context)
+	def post(self,request, *args, **kwargs):
+		form = ObservationForm(request.POST,request.FILES)
+		if form.is_valid():
+			observation = form.save(commit=False)
+			observation.delivery = Delivery.objects.get(pk=self.kwargs.get('pk')
+)
+			observation.save()
+			delivery.save()
+			return redirect(reverse('evaluation:evaluate',kwargs={"pk":self.kwargs.get('pk')}))
+		context = {
+			"form":form
+		}
+		return render(request, 'valuation/observation-teacher/observation.html', context)
+
+
+
+class CorrectionView(View):
+	def get(self,request, *args, **kwargs):
+		context = {
+			"form":PonderationForm
+		}
+		return render(request, 'evaluation/correction-teacher/correction.html', context)
+	def post(self,request, *args, **kwargs):
+		form = PonderationForm(request.POST,request.FILES)
+		if form.is_valid():
+			delivery = form.save(commit=False)
+			delivery.evaluation = Evaluation.objects.get(pk=self.kwargs.get('pk')
+)
+			delivery.save()
+			return redirect(reverse('evaluation:evaluate',kwargs={"pk":self.kwargs.get('pk')}))
+		context = {
+			"form":form
+		}
+		return render(request, 'evaluation/correction-teacher/correction.html', context)

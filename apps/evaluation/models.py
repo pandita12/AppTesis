@@ -21,15 +21,23 @@ class Delivery(models.Model):
 
     GENDER_CHOICES = [
         ('D', _('Delivered')),
-        ('U', _('Undelivered'))
+        ('U', _('Undelivered')),
+    ]
+
+    EVALUATION_CHOICES = [
+        ('R', _('Reprobate')),
+        ('A', _('Approved')),
     ]
 
     deliver_date = models.DateTimeField()
+    evaluative_message = models.CharField(max_length=200, null=True, blank=True)
+    evaluative_selection = models.CharField(max_length=1, choices=EVALUATION_CHOICES,
+     default='R') 
     task_upload = models.FileField(upload_to="taskupload/", max_length=100, null=True, blank=True)
     status_delivery = models.CharField(max_length=1, choices=GENDER_CHOICES, default='D') 
-    status_notifications = models.BooleanField(max_length=1)
-    user = models.ForeignKey(User, null=False, blank=False, on_delete=models.CASCADE)
-    evaluation_id = models.ForeignKey(Evaluation, null=False, blank=False, on_delete=models.CASCADE)
+    status_notifications = models.BooleanField(max_length=1, null= True)
+    user = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE)
+    evaluation = models.ForeignKey(Evaluation, related_name='evaluation', null=False, blank=False, on_delete=models.CASCADE)
     ponderation = models.FloatField(null=True)
 
     def is_approved(self):
@@ -42,7 +50,13 @@ class Config_Delivery_Rest(models.Model):
     max_aprobed = models.FloatField('approved')
 
 
-class Delivery_Rest(models.Model):
-    config_delivery = models.ForeignKey(Config_Delivery_Rest, null=False, blank=False, on_delete=models.CASCADE)
-    is_reprobate = models.BooleanField( 'ponderation reprobate', default=True)
-    is_approved = models.BooleanField('ponderation approved', default=False) 
+class Observation(models.Model):
+    
+    GENDER_CHOICES_OBSERVATION = [
+        ('N',_('Still to deliver')),
+        ('I',_('Incomplete content')),
+    ]
+
+    observation = models.CharField(max_length=1, choices=GENDER_CHOICES_OBSERVATION, default='N')
+    claim = models.CharField(max_length=200, null=False)
+    delivery = models.ForeignKey(Delivery, related_name='observation_delivery', null=True, blank=False, on_delete=models.CASCADE)  
