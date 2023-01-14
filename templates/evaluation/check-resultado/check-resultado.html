@@ -3,7 +3,7 @@
 
 {% block container%}
 <div class="card-body">
-      <center><h3 class="h3 sm-2">Evaluaciones</h3></center>
+      <center><h3 class="h3 sm-2">Evaluaciones Pendientes</h3></center>
 </div>
 <div class="row">
     <div class="col-lg-12">
@@ -19,33 +19,27 @@
                                 <th class="text-center"><span>Status</span></th>
                                 <th class="text-center"><span>Email</span></th>
                                 <th class="text-center">&nbsp; Botones Evaluativos</th>
-                                 <th><span>Pendiente por revisar</span></th>
                                 </tr>
                             </thead>
                            <tbody>
-                                {%for delivery in deliverys%}
+                                {%for delivery in deliverys_pending%}
                                <tr>
                                    <td>
-                                       {{ delivery.user.fullname }}
+                                       {{ delivery.student.fullname }}
                                    </td>
                                    <td>
                                        {{ delivery.deliver_date }}
                                    </td>
+                                   
                                    <td>
-                                    <select class="form-select form-select-sm" aria-label=".form-select-sm example">
-                                      <option selected>Estado</option>
-                            <option value="1">{{ delivery.status_delivery }}</option>
-                                    </select>
-                                   </td>
-                                   <td>
-                                       {{ delivery.user.email }}
+                                       {{ delivery.ponderation.ponderation }}
                                    </td>
                                    <!--Botones para correciones de evaluaciones-->
                                    <td>
                             <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter1"><strong> Bajar </strong> <i class="fa fa-download"></i></a>
                             <a href="{% url "evaluation:observation" delivery.pk %}" class="btn btn-warning btn-sm"><strong>Objeción</strong> <i class="fa fa-question"></i></a>
                             <a href="{% url "evaluation:correction" delivery.pk  %}" class="btn btn-success btn-sm"><strong>Corregir</strong> <i class="fa fa-check"></i></a>
-                            <a href="#" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter4"><strong>Eliminar</strong> <i class="fa fa-trash-o"></i></a>
+                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter4"><strong>Eliminar</strong> <i class="fa fa-trash-o"></i></a>
                                    </td>
                                    <!-- EndBoton-->
                                    <td>
@@ -63,6 +57,45 @@
                     </div>
                 </div>
             </div>
+            <div class="card-body">
+      <center><h3 class="h3 sm-2">Evaluaciones Corregidas</h3></center>
+            </div>
+            <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Usuario</span></th>
+                                <th class="text-center"><span>Enviado</span></th>
+                                <th class="text-center"><span>Status</span></th>
+                                <th class="text-center"><span>Email</span></th>
+                                </tr>
+                            </thead>
+                           <tbody>
+                                {%for delivery in deliverys_complete%}
+                               <tr>
+                                   <td>
+                                       {{ delivery.student.fullname }}
+                                   </td>
+                                   <td>
+                                       {{ delivery.deliver_date }}
+                                   </td>
+                                   
+                                   <td>
+                                       {{ delivery.ponderation.ponderation }}
+                                   </td>
+                                   <td>
+                             <div class="form-check">
+                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
+                                    <label class="form-check-label fa fa-bell" for="defaultCheck1">
+                                         Notificar Revisión
+                                    </label>
+                             </div>
+                                   </td>
+                               </tr>
+                               {%endfor%}
+                           </tbody>
+                        </table>
+                    </div>
         </div>
         <!-- Modal Donwload(1) -->
        <div class="modal fade" id="exampleModalCenter1" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -96,11 +129,15 @@
         </button>
       </div>
       <div class="modal-body">
-        Estas seguro de eliminar la asignación ?    </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
-        <button type="button" class="btn btn-danger">Eliminar</button>
+
+        <form method="post"> 
+            {% csrf_token %}
+
+            <p><strong>¿Desea Eliminar la asignacion {{ object }} ?</strong></p>
+
+        <button type="submit" class="btn btn-danger">Eliminar</button>
       </div>
+        </form>
     </div>
   </div>
 </div>

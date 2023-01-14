@@ -1,6 +1,6 @@
 from django import forms
 from django.forms import ModelForm, CharField, FileField, DateTimeField, CheckboxInput, ModelChoiceField, Select, ModelMultipleChoiceField, SelectMultiple, NumberInput
-from .models import Evaluation, Observation, Delivery
+from .models import Evaluation, Observation, Delivery, DeliveryPonderation
 
 class CreateEvaluationForm(ModelForm):
 	assignment_name = CharField(max_length=25)
@@ -32,17 +32,8 @@ class ObservationForm(ModelForm):
 
 class PonderationForm(ModelForm):
 
-	PONDERATION_CHOICES = (
-		('R','Reprobate'),
-		('A','Approved'),
-		)
-
-	evaluative_selection = forms.CharField(widget=forms.Select(choices=PONDERATION_CHOICES))
 	ponderation = forms.NumberInput()
-	deliver_date = forms.DateField()
-	evaluative_message = forms.CharField(
-		widget = forms.Textarea(attrs={'rows':3})
-		)
+
 	class Meta:
-		model = Delivery
-		fields = ["evaluative_selection", "ponderation", "evaluative_message", "deliver_date"]
+		model = DeliveryPonderation
+		fields = ["ponderation"]

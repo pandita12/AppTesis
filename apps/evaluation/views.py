@@ -4,8 +4,10 @@ from django.http import HttpResponse
 from apps.evaluation.models import Evaluation, Delivery
 from .forms import CreateEvaluationForm, ObservationForm, PonderationForm
 from django.views import View
+from django.views.generic import DeleteView
 from django.urls import reverse
 from apps.lesson.models import Classroom
+from django.urls import reverse_lazy
 # Create your views here.
 
 def asignament_view(request):
@@ -31,12 +33,24 @@ class EvaluationView(View):
 		}
 		return render(request, 'evaluation/create-evaluation.html', context)
 
+
+class DeleteEvaluation(DeleteView):
+	model = Evaluation
+	template_name = 'evaluation/check-resultado/check-resultado.html'
+	success_url = reverse_lazy('evaluation:evaluate')
+
+
+
 def evaluate_view(request, pk):
-	deliverys = Delivery.objects.filter(evaluation_id__classroom_id__pk=pk)
+	deliverys_pending = Delivery.objects.filter(evaluation_id__classroom_id__pk=pk, ponderation__isnull=True)
+	deliverys_complete = Delivery.objects.filter(evaluation_id__classroom_id__pk=pk,ponderation__isnull=False)
 	context = {
-		"deliverys":deliverys
+		"deliverys_pending":deliverys_pending,
+	    "deliverys_complete":deliverys_complete
 	}
 	return render(request, 'evaluation/check-resultado/check-resultado.html', context)
+
+
 
 def result_evaluation_view(request):
 	return render(request, 'evaluation/result_evaluacion.html')
@@ -49,7 +63,7 @@ class ObservationView(View):
 		context = {
 			"form":ObservationForm
 		}
-		return render(request, 'evaluation/correction-teacher/correction.html', context)
+		return render(request, 'evaluation/observation-teacher/observation.html', context)
 	def post(self,request, *args, **kwargs):
 		form = ObservationForm(request.POST,request.FILES)
 		if form.is_valid():
@@ -57,12 +71,11 @@ class ObservationView(View):
 			observation.delivery = Delivery.objects.get(pk=self.kwargs.get('pk')
 )
 			observation.save()
-			delivery.save()
 			return redirect(reverse('evaluation:evaluate',kwargs={"pk":self.kwargs.get('pk')}))
 		context = {
 			"form":form
 		}
-		return render(request, 'valuation/observation-teacher/observation.html', context)
+		return render(request, 'evaluation/observation-teacher/observation.html', context)
 
 
 
@@ -75,10 +88,10 @@ class CorrectionView(View):
 	def post(self,request, *args, **kwargs):
 		form = PonderationForm(request.POST,request.FILES)
 		if form.is_valid():
-			delivery = form.save(commit=False)
-			delivery.evaluation = Evaluation.objects.get(pk=self.kwargs.get('pk')
+			ponderation = form.save(commit=False)
+			ponderation.delivery = Delivery.objects.get(pk=self.kwargs.get('pk')
 )
-			delivery.save()
+			ponderation.save()
 			return redirect(reverse('evaluation:evaluate',kwargs={"pk":self.kwargs.get('pk')}))
 		context = {
 			"form":form

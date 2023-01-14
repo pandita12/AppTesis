@@ -7,7 +7,7 @@ from django.utils import timezone
 # Create your models here.
 
 class Evaluation(models.Model):
-    assignment_name = models.CharField(max_length=25)
+    assignment_name = models.CharField(max_length=50)
     support_material = models.FileField(upload_to="material", max_length=100, null=True)
     date_start = models.DateTimeField()
     date_finish = models.DateTimeField()
@@ -19,30 +19,21 @@ class Evaluation(models.Model):
 
 class Delivery(models.Model):
 
-    GENDER_CHOICES = [
-        ('D', _('Delivered')),
-        ('U', _('Undelivered')),
-    ]
-
-    EVALUATION_CHOICES = [
-        ('R', _('Reprobate')),
-        ('A', _('Approved')),
-    ]
-
-    deliver_date = models.DateTimeField()
+    deliver_date = models.DateTimeField(default=timezone.now)
     evaluative_message = models.CharField(max_length=200, null=True, blank=True)
-    evaluative_selection = models.CharField(max_length=1, choices=EVALUATION_CHOICES,
-     default='R') 
-    task_upload = models.FileField(upload_to="taskupload/", max_length=100, null=True, blank=True)
-    status_delivery = models.CharField(max_length=1, choices=GENDER_CHOICES, default='D') 
-    status_notifications = models.BooleanField(max_length=1, null= True)
-    user = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE)
+    task_upload = models.FileField(upload_to="taskupload/", max_length=100, null=True, blank=True) 
+    student = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE)
     evaluation = models.ForeignKey(Evaluation, related_name='evaluation', null=False, blank=False, on_delete=models.CASCADE)
-    ponderation = models.FloatField(null=True)
+    
 
     def is_approved(self):
         return "approved" if self.ponderation >= self.config_delivery.min_aprobed and self.ponderation <= self.config_delivery.max_aprobed else "reprobate"
 
+class DeliveryPonderation(models.Model):
+    delivery = models.OneToOneField(Delivery, related_name='ponderation', on_delete=models.CASCADE)
+    ponderation = models.FloatField(null=True, blank=True)
+    date_ponderation = models.DateTimeField(default=timezone.now)
+ 
 class Config_Delivery_Rest(models.Model):
     delivery = models.ForeignKey(Delivery, null=False, blank=False, on_delete=models.CASCADE,
      related_name= "config_delivery")
