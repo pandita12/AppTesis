@@ -1,6 +1,6 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
-from django.http import HttpResponse
+from django.http import HttpResponse, HttpResponseRedirect
 from apps.evaluation.models import Evaluation, Delivery
 from .forms import CreateEvaluationForm, ObservationForm, PonderationForm
 from django.views import View
@@ -34,10 +34,13 @@ class EvaluationView(View):
 		return render(request, 'evaluation/create-evaluation.html', context)
 
 
-class DeleteEvaluation(DeleteView):
-	model = Evaluation
-	template_name = 'evaluation/check-resultado/check-resultado.html'
-	success_url = reverse_lazy('evaluation:evaluate')
+def delete(request, pk):
+	deliverys = Delivery.objects.get(id=pk)
+	context = {
+		"deliverys":deliverys
+	}
+	deliverys.delete()
+	return render(request, 'base/base_system.html', context)
 
 
 

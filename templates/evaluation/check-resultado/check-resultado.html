@@ -16,7 +16,6 @@
                                 <tr>
                                 <th><span>Usuario</span></th>
                                 <th class="text-center"><span>Enviado</span></th>
-                                <th class="text-center"><span>Status</span></th>
                                 <th class="text-center"><span>Email</span></th>
                                 <th class="text-center">&nbsp; Botones Evaluativos</th>
                                 </tr>
@@ -30,26 +29,18 @@
                                    <td>
                                        {{ delivery.deliver_date }}
                                    </td>
-                                   
                                    <td>
-                                       {{ delivery.ponderation.ponderation }}
+                                       {{ delivery.student.email }}
+
                                    </td>
                                    <!--Botones para correciones de evaluaciones-->
                                    <td>
                             <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter1"><strong> Bajar </strong> <i class="fa fa-download"></i></a>
                             <a href="{% url "evaluation:observation" delivery.pk %}" class="btn btn-warning btn-sm"><strong>Objeción</strong> <i class="fa fa-question"></i></a>
                             <a href="{% url "evaluation:correction" delivery.pk  %}" class="btn btn-success btn-sm"><strong>Corregir</strong> <i class="fa fa-check"></i></a>
-                            <a href="" class="btn btn-danger btn-sm" data-toggle="modal" data-target="#exampleModalCenter4"><strong>Eliminar</strong> <i class="fa fa-trash-o"></i></a>
+                            <a href="{% url "evaluation:delete" delivery.pk %}" class="btn btn-danger btn-sm"><strong>Eliminar</strong> <i class="fa fa-trash-o"></i></a>
                                    </td>
                                    <!-- EndBoton-->
-                                   <td>
-                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label fa fa-bell" for="defaultCheck1">
-                                         Notificar Revisión
-                                    </label>
-                             </div>
-                                   </td>
                                </tr>
                                {%endfor%}
                            </tbody>
@@ -57,6 +48,11 @@
                     </div>
                 </div>
             </div>
+            <br>
+            <br>
+            <br>
+            <br>
+            <br>
             <div class="card-body">
       <center><h3 class="h3 sm-2">Evaluaciones Corregidas</h3></center>
             </div>
@@ -66,8 +62,8 @@
                                 <tr>
                                 <th><span>Usuario</span></th>
                                 <th class="text-center"><span>Enviado</span></th>
-                                <th class="text-center"><span>Status</span></th>
                                 <th class="text-center"><span>Email</span></th>
+                                <th class="text-center"><span>Result (Evaluation)</span></th> 
                                 </tr>
                             </thead>
                            <tbody>
@@ -79,17 +75,11 @@
                                    <td>
                                        {{ delivery.deliver_date }}
                                    </td>
-                                   
                                    <td>
-                                       {{ delivery.ponderation.ponderation }}
+                                        {{ delivery.student.email }}
                                    </td>
-                                   <td>
-                             <div class="form-check">
-                                <input class="form-check-input" type="checkbox" value="" id="defaultCheck1">
-                                    <label class="form-check-label fa fa-bell" for="defaultCheck1">
-                                         Notificar Revisión
-                                    </label>
-                             </div>
+                                   <td class="text-center">
+                                       {{ delivery.ponderation.ponderation }}
                                    </td>
                                </tr>
                                {%endfor%}
@@ -130,12 +120,7 @@
       </div>
       <div class="modal-body">
 
-        <form method="post"> 
-            {% csrf_token %}
-
-            <p><strong>¿Desea Eliminar la asignacion {{ object }} ?</strong></p>
-
-        <button type="submit" class="btn btn-danger">Eliminar</button>
+    
       </div>
         </form>
     </div>
