@@ -3,7 +3,7 @@
 
 {% block container%}
 <div class="card-body">
-      <center><h3 class="h3 sm-2">Evaluaciones</h3></center>
+      <center><h3 class="h3 sm-2">Evaluaciones Pendientes</h3></center>
 </div>
 <div class="row">
     <div class="col-lg-12">
@@ -17,32 +17,27 @@
                                 <th><span>Asignación</span></th>
                                 <th ><span>Material de apoyo</span></th>
                                 <th ><span>Docente</span></th>
-                                 <th ><span>Tema</span></th>
                                 <th >&nbsp; Botones Evaluativos</th>
                                 </tr>
                             </thead>
                            <tbody>
-
+                        {%for delivery in deliverys%}
                                <tr>
                                    <td>
-                                       none
+                                      {{ delivery.evaluation.assignment_name}}
                                    </td>
                                    <td>
-                                       none
+                                       {{ delivery.evaluation.support_material}}
                                    </td>
                                    <td>
-                                        none
-                                   </td>
-                    
-                                   <td>
-                                        none
+                                       {{ delivery.evaluation.classroom_id.professor_id.users.fullname }}
                                    </td>
                                    <td>
-                                    <a href="{% url 'evaluation:send-task' %}" class="btn btn-success btn-sm"><strong> Enviar Asignación </strong> <i class="fa fa-download"></i></a>
+                                    <a href="{% url 'evaluation:send-task' delivery.pk %}" class="btn btn-success btn-sm"><strong> Enviar Asignación </strong> <i class="fa fa-download"></i></a>
                                    </td>
                                    <!-- EndBoton-->
                                </tr>
-                               
+                               {%endfor%}
                            </tbody>
                         </table>
                     </div>
@@ -51,5 +46,101 @@
         </div>
        
     </div>
+    <!-- Seccion Resultado y Observacion Evaluativa -->
+    <br>
+    <br>
+    <br>
+    <br>
+    <!-- Seccion Resultado Evaluaciones Corregidas -->
+<div class="card-body">
+    <center><h3 class="h3 sm-2">Evaluaciones Culminadas</h3></center>
+</div>
+    <div class="col-lg-12">
+        <div class="card-body">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Asignación</span></th>
+                                <th ><span>Docente</span></th>
+                                <th ><span>Ponderación</span></th>
+                                 
+                                </tr>
+                            </thead>
+                           <tbody>
+                        {%for delivery in deliverys%}
+                               <tr>
+                                   <td>
+                                      {{ delivery.evaluation.assignment_name}}
+                                   </td>
+                                   <td>
+                                       {{ delivery.evaluation.classroom_id.professor_id.users.fullname }}
+                                   </td>
+                                   <td>
+                                        {{ delivery.ponderation.ponderation }}
+                                   </td>
+                    
+                               </tr>
+                        {%endfor%}    
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- end Evaluaciones Corregidas -->
+<br>
+<br>
+<br>
+<br>
+
+<!-- Seccion Observaciones Evaluativas -->
+<div class="card-body">
+    <center><h3 class="h3 sm-2">Observaciones Evaluativas</h3></center>
+</div>
+    <div class="col-lg-12">
+        <div class="card-body">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Asignación</span></th>
+                                <th ><span>Docente</span></th>
+                                <th ><span>Observación</span></th>
+                                 <th ><span>Comentario</span></th>
+                                </tr>
+                            </thead>
+                           <tbody>
+                        {%for delivery in deliverys%}
+                               <tr>
+                                   <td>
+                                       {{ delivery.evaluation.assignment_name}}
+                                   </td>
+                                   <td>
+                                       {{ delivery.evaluation.classroom_id.professor_id.users.fullname }}
+                                   </td>
+                                   <td>
+                                        {{ delivery.observation_delivery.observation }}
+                                   </td>
+                    
+                                   <td>
+                                        {{ delivery.observation_delivery.claim }}
+                                   </td>
+            
+                               </tr>
+                        {%endfor%}       
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- end Observaciones Evaluativas -->
 </div>
 {%endblock%}

@@ -1,43 +1,14 @@
 {% extends "base/base_system.html"%}
+{% load static %}
 <title>{% block title %}Resultado Evaluativo {% endblock title %}</title>
 {% block container%}
 <div class="card-body">
     <center><h3 class="h3 sm-2">Resultados Evaluativos</h3></center>
 </div>
 <div class="row">
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Pendiente</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-        <a href="#" class="btn btn-primary " data-toggle="modal" data-target="#exampleModalCenter5">Ver <i class="fa fa-search fa-sm"></i></a>
-      </div>
-    </div>
-  </div>
-  <div class="col-sm-6">
-    <div class="card">
-      <div class="card-body">
-        <h5 class="card-title">Resultado</h5>
-      <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-         <a href="#" class="btn btn-primary " data-toggle="modal" data-target="#exampleModalCenter6">Ver <i class="fa fa-search fa-sm"></i></a>
-      </div>
-    </div>
-  </div>
-  <!-- Modal Pendiente -->
-       <div class="modal fade" id="exampleModalCenter5" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Asignaciones pendientes</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-12 ml-auto">
-         <div class="main-box no-header clearfix">
+    <div class="col-lg-12">
+        <div class="card-body">
+            <div class="main-box no-header clearfix">
                 <div class="main-box-body clearfix">
                     <div class="table-responsive">
                         <table class="table user-list">
@@ -45,7 +16,45 @@
                                 <tr>
                                 <th><span>Asignación</span></th>
                                 <th ><span>Docente</span></th>
-                                 <th ><span>Estatus</span></th>
+                                <th ><span>Ponderación</span></th>
+                                </tr>
+                            </thead>
+                           <tbody>
+                            {%for delivery in deliverys_complete%}
+                               <tr>
+                                   <td>
+                                       none
+                                   </td>
+                                   <td>
+                                       none
+                                   </td>
+                                   <td>
+                                        {{ delivery.ponderation.ponderation }}
+                                   </td>
+                               </tr> 
+                            {%endfor%} 
+                           </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<div class="card-body">
+    <center><h3 class="h3 sm-2">Observación Evaluativa</h3></center>
+</div>
+    <div class="col-lg-12">
+        <div class="card-body">
+            <div class="main-box no-header clearfix">
+                <div class="main-box-body clearfix">
+                    <div class="table-responsive">
+                        <table class="table user-list">
+                            <thead>
+                                <tr>
+                                <th><span>Asignación</span></th>
+                                <th ><span>Docente</span></th>
+                                <th ><span>Observación</span></th>
+                                 <th ><span>Comentario</span></th>
                                 </tr>
                             </thead>
                            <tbody>
@@ -54,7 +63,9 @@
                                    <td>
                                        none
                                    </td>
-                                  
+                                   <td>
+                                       none
+                                   </td>
                                    <td>
                                         none
                                    </td>
@@ -70,72 +81,10 @@
                     </div>
                 </div>
             </div>
-</div>
+        </div>
     </div>
-  </div>
-</div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- EndModal-->
- <!-- Modal Corregidos -->
-       <div class="modal fade" id="exampleModalCenter6" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
-        <div class="modal-dialog modal-dialog-centered" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLongTitle">Asignaciones Corregidas</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <div class="row">
-      <div class="col-md-12 ml-auto">
-         <div class="main-box no-header clearfix">
-                <div class="main-box-body clearfix">
-                    <div class="table-responsive">
-                        <table class="table user-list">
-                            <thead>
-                                <tr>
-                                <th><span>Asignación</span></th>
-                                <th ><span>Docente</span></th>
-                                 <th ><span>Ponderación</span></th>
-                                </tr>
-                            </thead>
-                           <tbody>
-
-                               <tr>
-                                   <td>
-                                       none
-                                   </td>
-                                  
-                                   <td>
-                                        none
-                                   </td>
-                    
-                                   <td>
-                                        none
-                                   </td>
-                                   <!-- EndBoton-->
-                               </tr>
-                               
-                           </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-</div>
-    </div>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Cerrar</button>
-      </div>
-    </div>
-  </div>
-</div>
-<!-- EndModal-->
 </div>
 {%endblock%}
+{% block extrajs %}
+    <script src="{% static 'js/evaluation/index.js' %}"></script>
+{% endblock extrajs%}

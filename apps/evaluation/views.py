@@ -1,17 +1,22 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.http import HttpResponse, HttpResponseRedirect
-from apps.evaluation.models import Evaluation, Delivery
-from .forms import CreateEvaluationForm, ObservationForm, PonderationForm
+from apps.evaluation.models import Evaluation, Delivery, Observation, DeliveryPonderation
+from .forms import CreateEvaluationForm, ObservationForm, PonderationForm, SendTaskForm
 from django.views import View
-from django.views.generic import DeleteView
+from django.views.generic import DeleteView, ListView
 from django.urls import reverse
 from apps.lesson.models import Classroom
 from django.urls import reverse_lazy
 # Create your views here.
 
 def asignament_view(request):
-	return render(request, 'evaluation/asignament/assignament.html')
+	deliverys = Delivery.objects.filter(evaluation_id__classroom_id__pk=1,student__pk=request.user.pk)
+	context = {
+		"deliverys":deliverys
+	}
+
+	return render(request, 'evaluation/asignament/assignament.html', context)
 
 
 class EvaluationView(View):
@@ -54,12 +59,26 @@ def evaluate_view(request, pk):
 	return render(request, 'evaluation/check-resultado/check-resultado.html', context)
 
 
+class SendtaskView(View):
+	def get(self,request, *args, **kwargs):
+		context = {
+			"form":SendTaskForm
+		}
+		return render(request, 'evaluation/send-task/send-task.html', context)
+	def post(self,request, *args, **kwargs):
+		form = SendTaskForm(request.POST,request.FILES)
+		if form.is_valid():
+			deliverys = form.save(commit=False)
+			deliverys.delivery = Delivery.objects.get(pk=self.kwargs.get('pk')
+)
+			deliverys.save()
+			return redirect(reverse('evaluation:asignament',kwargs={"pk":self.kwargs.get('pk')}))
+		context = {
+			"form":form
+		}
+		return render(request, 'evaluation/send-task/send-task.html', context)
 
-def result_evaluation_view(request):
-	return render(request, 'evaluation/result_evaluacion.html')
 
-def send_task_view(request):
-	return render(request, 'evaluation/send-task/send-task.html')
 
 class ObservationView(View):
 	def get(self,request, *args, **kwargs):
@@ -74,7 +93,7 @@ class ObservationView(View):
 			observation.delivery = Delivery.objects.get(pk=self.kwargs.get('pk')
 )
 			observation.save()
-			return redirect(reverse('evaluation:evaluate',kwargs={"pk":self.kwargs.get('pk')}))
+			return redirect(reverse('lesson:classroom_index',kwargs={"pk":self.kwargs.get('pk')}))
 		context = {
 			"form":form
 		}
@@ -95,7 +114,7 @@ class CorrectionView(View):
 			ponderation.delivery = Delivery.objects.get(pk=self.kwargs.get('pk')
 )
 			ponderation.save()
-			return redirect(reverse('evaluation:evaluate',kwargs={"pk":self.kwargs.get('pk')}))
+			return redirect(reverse('lesson:classroom_index',kwargs={"pk":self.kwargs.get('pk')}))
 		context = {
 			"form":form
 		}

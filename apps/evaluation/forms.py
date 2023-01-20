@@ -37,3 +37,12 @@ class PonderationForm(ModelForm):
 	class Meta:
 		model = DeliveryPonderation
 		fields = ["ponderation"]
+
+class SendTaskForm(ModelForm):
+
+	title_task = forms.CharField(max_length=100)
+	task_upload = forms.FileField()
+
+	class Meta:
+		model = Delivery
+		fields = ["title_task", "task_upload"]

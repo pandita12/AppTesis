@@ -23,6 +23,7 @@
                                             <th>Profesor Asignado</th>
                                             <th>Sección</th>
                                             <th>Periodo de clase</th>
+                                            <th>Asignación</th>
                                         </tr>
                                     </thead>
                                     <tfoot>
@@ -32,6 +33,7 @@
                                             <th>Assigned Teacher</th>
                                             <th>Section</th>
                                             <th>class period</th>
+                                            <th>Asignament</th>
                                         </tr>
                                     </tfoot>
                                     <tbody>
@@ -41,6 +43,7 @@
                         <td>{{ classroom.professor_id.users.fullname }}</td>
                         <td>{{ classroom.section }}</td>
                         <td>{{ classroom.classperiod }}</td>
+                        <td><a href="{% url 'evaluation:asignament' %}" class="btn btn-success btn-sm"><strong> Asignación</strong> <i class="fa fa-check"></i></a></td>
                                         </tr>
 
                         <td>{{ classroom.matter_id.name_m }}</td>
@@ -48,20 +51,7 @@
                         <td>{{ classroom.professor_id.users.fullname }}</td>
                         <td>{{ classroom.section }}</td>
                         <td>{{ classroom.classperiod }}</td>
-                                        </tr>
-                                        <tr>
-                        <td>{{ classroom.matter_id.name_m }}</td>
-                        <td>{{ classroom.professor_id.department }}</td>
-                        <td>{{ classroom.professor_id.users.fullname }}</td>
-                        <td>{{ classroom.section }}</td>
-                        <td>{{ classroom.classperiod }}</td>
-                                        </tr>
-                                        <tr>
-                        <td>{{ classroom.matter_id.name_m }}</td>
-                        <td>{{ classroom.professor_id.department }}</td>
-                        <td>{{ classroom.professor_id.users.fullname }}</td>
-                        <td>{{ classroom.section }}</td>
-                        <td>{{ classroom.classperiod }}</td>
+                        <td><a href="{% url 'evaluation:asignament' %}" class="btn btn-success btn-sm"><strong> Asignación</strong> <i class="fa fa-check"></i></a></td>
                                         </tr>
                                     </tbody>
                                 </table>
@@ -71,7 +61,6 @@
                     </div>
 
 {%endblock %}
-
 
                 
                

@@ -21,6 +21,7 @@ class Delivery(models.Model):
 
     deliver_date = models.DateTimeField(default=timezone.now)
     evaluative_message = models.CharField(max_length=200, null=True, blank=True)
+    title_task = models.CharField(max_length=100, null=True, blank=True)
     task_upload = models.FileField(upload_to="taskupload/", max_length=100, null=True, blank=True) 
     student = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE)
     evaluation = models.ForeignKey(Evaluation, related_name='evaluation', null=False, blank=False, on_delete=models.CASCADE)
@@ -42,6 +43,7 @@ class Config_Delivery_Rest(models.Model):
 
 
 class Observation(models.Model):
+    delivery = models.OneToOneField(Delivery, related_name='observation_delivery', null=True, blank=False, on_delete=models.CASCADE)
     
     GENDER_CHOICES_OBSERVATION = [
         ('N',_('Still to deliver')),
@@ -49,5 +51,4 @@ class Observation(models.Model):
     ]
 
     observation = models.CharField(max_length=1, choices=GENDER_CHOICES_OBSERVATION, default='N')
-    claim = models.CharField(max_length=200, null=False)
-    delivery = models.ForeignKey(Delivery, related_name='observation_delivery', null=True, blank=False, on_delete=models.CASCADE)  
+    claim = models.CharField(max_length=200, null=False)  
