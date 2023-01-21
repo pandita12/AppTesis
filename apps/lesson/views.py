@@ -11,12 +11,8 @@ def index_lesson(request):
 
 @login_required
 def detail_lesson(request, pk):
-	ueryclassroom = Classroom.objects.get(pk=1)
-	context = {
-		"classroom": ueryclassroom
-	}
-
-	return render(request, 'home/home.html', context)
+	
+	return render(request, 'home/home.html',)
 
 
 @login_required

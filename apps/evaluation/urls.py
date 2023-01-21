@@ -9,7 +9,7 @@ app_name = 'evaluation'
 urlpatterns = [
    
    #Urls Estudiante
-   path('asignament/', asignament_view, name="asignament"),
+   path('<pk>/asignament/', asignament_view, name="asignament"),
    path('<pk>/send-task/', SendtaskView.as_view(), name="send-task"),
    #path('result-evaluativo/', list_result, name="result-evaluation"),
 

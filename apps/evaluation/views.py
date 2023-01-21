@@ -10,10 +10,14 @@ from apps.lesson.models import Classroom
 from django.urls import reverse_lazy
 # Create your views here.
 
-def asignament_view(request):
-	deliverys = Delivery.objects.filter(evaluation_id__classroom_id__pk=1,student__pk=request.user.pk)
+def asignament_view(request, pk):
+	evaluations = Evaluation.objects.filter(classroom_id=pk)
+	deliverys_pending = Delivery.objects.filter(evaluation__classroom_id__pk=pk, ponderation__isnull=True,student=request.user.pk)
+	deliverys_complete = Delivery.objects.filter(evaluation__classroom_id__pk=pk,ponderation__isnull=False,student=request.user.pk)	
 	context = {
-		"deliverys":deliverys
+		"deliverys_pending":deliverys_pending,
+	    "deliverys_complete":deliverys_complete,
+	    "evaluations":evaluations
 	}
 
 	return render(request, 'evaluation/asignament/assignament.html', context)
@@ -69,10 +73,11 @@ class SendtaskView(View):
 		form = SendTaskForm(request.POST,request.FILES)
 		if form.is_valid():
 			deliverys = form.save(commit=False)
-			deliverys.delivery = Delivery.objects.get(pk=self.kwargs.get('pk')
+			deliverys.student = request.user
+			deliverys.evaluation = Evaluation.objects.get(pk=self.kwargs.get('pk')
 )
 			deliverys.save()
-			return redirect(reverse('evaluation:asignament',kwargs={"pk":self.kwargs.get('pk')}))
+			return redirect(reverse('lesson:detail',kwargs={"pk":self.kwargs.get('pk')}))
 		context = {
 			"form":form
 		}

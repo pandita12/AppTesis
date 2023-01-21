@@ -51,3 +51,6 @@ class Enrollment(models.Model):
     registration_date = models.DateTimeField()
     status = models.BooleanField(max_length=1)
     semester_period = models.CharField(max_length=6, null=True)
+
+    def __str__(self):
+        return "('%s') %s" % (self.student.users.fullname(), self.classroom.matter_id.name_m.capitalize())

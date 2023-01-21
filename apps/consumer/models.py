@@ -15,6 +15,13 @@ class User(AbstractUser):
         ('F', _('Female')),
         ('M', _('Male'))
     ]
+
+    TYPE_USER_CHOICES = [
+        ('E', _('Estudiante')),
+        ('P', _('Profesor/a')),
+        ('C', _('Coordinador'))
+
+    ]
     #: First and last name do not cover name patterns around the globe
     username = None 
     name = models.CharField(blank=True, max_length=50)
@@ -23,6 +30,7 @@ class User(AbstractUser):
     direction = models.CharField(max_length=50)
     phone = models.CharField(max_length=12)
     password = models.SlugField(max_length=255)
+    types_user = models.CharField(max_length=1, choices=TYPE_USER_CHOICES, default='E')
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='F')
     is_student = models.BooleanField('student status', default=True)
     is_teacher = models.BooleanField('teacher status', default=False)

@@ -23,7 +23,7 @@ class Delivery(models.Model):
     evaluative_message = models.CharField(max_length=200, null=True, blank=True)
     title_task = models.CharField(max_length=100, null=True, blank=True)
     task_upload = models.FileField(upload_to="taskupload/", max_length=100, null=True, blank=True) 
-    student = models.ForeignKey(User, null=True, blank=False, on_delete=models.CASCADE)
+    student = models.ForeignKey(User,related_name='delivery', null=False, blank=False, on_delete=models.CASCADE)
     evaluation = models.ForeignKey(Evaluation, related_name='evaluation', null=False, blank=False, on_delete=models.CASCADE)
     
 

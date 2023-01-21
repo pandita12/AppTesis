@@ -37,22 +37,18 @@
                                         </tr>
                                     </tfoot>
                                     <tbody>
+                                {%for enrollment in request.user.student.enrollment.all%}
                                         <tr>
-                        <td>{{ classroom.matter_id.name_m }}</td>
-                        <td>{{ classroom.professor_id.department }}</td>
-                        <td>{{ classroom.professor_id.users.fullname }}</td>
-                        <td>{{ classroom.section }}</td>
-                        <td>{{ classroom.classperiod }}</td>
-                        <td><a href="{% url 'evaluation:asignament' %}" class="btn btn-success btn-sm"><strong> Asignación</strong> <i class="fa fa-check"></i></a></td>
+                                        
+                        <td>{{ enrollment.classroom.matter_id.name_m }}</td>
+                        <td>{{ enrollment.classroom.professor_id.department }}</td>
+                        <td>{{ enrollment.classroom.professor_id.users.fullname }}</td>
+                        <td>{{ enrollment.classroom.section }}</td>
+                        <td>{{ enrollment.classroom.classperiod }}</td>
+                        <td><a href="{% url "evaluation:asignament" enrollment.classroom.pk  %}" class="btn btn-success btn-sm"><strong> Asignación</strong> <i class="fa fa-check"></i></a></td>
+                        
                                         </tr>
-
-                        <td>{{ classroom.matter_id.name_m }}</td>
-                        <td>{{ classroom.professor_id.department }}</td>
-                        <td>{{ classroom.professor_id.users.fullname }}</td>
-                        <td>{{ classroom.section }}</td>
-                        <td>{{ classroom.classperiod }}</td>
-                        <td><a href="{% url 'evaluation:asignament' %}" class="btn btn-success btn-sm"><strong> Asignación</strong> <i class="fa fa-check"></i></a></td>
-                                        </tr>
+                                {%endfor%} 
                                     </tbody>
                                 </table>
                             </div>

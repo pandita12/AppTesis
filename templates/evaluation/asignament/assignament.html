@@ -21,19 +21,19 @@
                                 </tr>
                             </thead>
                            <tbody>
-                        {%for delivery in deliverys%}
+                        {%for evaluation in evaluations%}
                                <tr>
                                    <td>
-                                      {{ delivery.evaluation.assignment_name}}
+                                      {{ evaluation.assignment_name}}
                                    </td>
                                    <td>
-                                       {{ delivery.evaluation.support_material}}
+                            <a href='{{MEDIA_URL}}{{evaluation.support_material}}'>ver</a>   
                                    </td>
                                    <td>
-                                       {{ delivery.evaluation.classroom_id.professor_id.users.fullname }}
+                                       {{ evaluation.classroom_id.professor_id.users.fullname }}
                                    </td>
                                    <td>
-                                    <a href="{% url 'evaluation:send-task' delivery.pk %}" class="btn btn-success btn-sm"><strong> Enviar Asignación </strong> <i class="fa fa-download"></i></a>
+                                    <a href="{% url 'evaluation:send-task' evaluation.pk %}" class="btn btn-success btn-sm"><strong> Enviar Asignación </strong> <i class="fa fa-download"></i></a>
                                    </td>
                                    <!-- EndBoton-->
                                </tr>
@@ -70,7 +70,7 @@
                                 </tr>
                             </thead>
                            <tbody>
-                        {%for delivery in deliverys%}
+                        {%for delivery in deliverys_complete%}
                                <tr>
                                    <td>
                                       {{ delivery.evaluation.assignment_name}}
@@ -116,7 +116,7 @@
                                 </tr>
                             </thead>
                            <tbody>
-                        {%for delivery in deliverys%}
+                        {%for delivery in deliverys_complete%}
                                <tr>
                                    <td>
                                        {{ delivery.evaluation.assignment_name}}
