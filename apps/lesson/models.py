@@ -46,7 +46,7 @@ class Students(models.Model):
         return self.users.fullname()
 
 class Enrollment(models.Model):
-    classroom = models.ForeignKey(Classroom, null=False, blank=False, on_delete=models.CASCADE)
+    classroom = models.ForeignKey(Classroom, related_name='enrollment', null=False, blank=False, on_delete=models.CASCADE)
     student = models.ForeignKey(Students, null=False, related_name="enrollment", blank=False, on_delete=models.CASCADE)
     registration_date = models.DateTimeField()
     status = models.BooleanField(max_length=1)

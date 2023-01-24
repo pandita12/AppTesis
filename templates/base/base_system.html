@@ -102,7 +102,7 @@
 {% for classroom in request.user.professor.classroom.all %}     
                     <div class="bg-white py-2 collapse-inner rounded">
                         <h6 class="collapse-header">Asignación:</h6>
-            <a class="collapse-item" href="{% url "evaluation:create-evaluation" classroom.pk %}">Crear Asignación</a>
+        <a class="collapse-item" href="{% url "evaluation:create-evaluation" classroom.pk %}">Crear Asignación</a>
                     </div>
 {%endfor%}
 

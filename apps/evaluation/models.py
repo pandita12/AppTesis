@@ -16,6 +16,11 @@ class Evaluation(models.Model):
     def if_ending(self):
         return self.date_finish > timezone.now()
 
+    def full_delivery(self):
+        total = self.evaluation.count()
+        delivery = self.classroom_id.enrollment.count() - self.evaluation.count() 
+        return "%s / %s" % (total, delivery) 
+
 
 class Delivery(models.Model):
 
@@ -29,6 +34,9 @@ class Delivery(models.Model):
 
     def is_approved(self):
         return "approved" if self.ponderation >= self.config_delivery.min_aprobed and self.ponderation <= self.config_delivery.max_aprobed else "reprobate"
+
+    def has_ponderation(self):
+        return self.ponderation.count()
 
 class DeliveryPonderation(models.Model):
     delivery = models.OneToOneField(Delivery, related_name='ponderation', on_delete=models.CASCADE)
@@ -51,4 +59,9 @@ class Observation(models.Model):
     ]
 
     observation = models.CharField(max_length=1, choices=GENDER_CHOICES_OBSERVATION, default='N')
-    claim = models.CharField(max_length=200, null=False)  
+    claim = models.CharField(max_length=200, null=False)
+
+
+class ModeratorClassroom(models.Model):
+    classroom = models.ForeignKey(Classroom, related_name='moderator_classroom',null=False, blank=False, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, related_name='moderator_classroom',null=False, blank=False, on_delete=models.CASCADE)  

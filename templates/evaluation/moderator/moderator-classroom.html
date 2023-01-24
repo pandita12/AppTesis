@@ -1,0 +1,59 @@
+{% extends "base/base_system.html"%}
+<title>{% block title %} Materias Asignadas {% endblock title %}</title>
+
+{% block container%}
+
+<div class="text-letf">
+    <h1 class="h4 text-gray-900 mb-4"> Coordinador  {{ request.user.fullname }} </h1>
+</div>
+
+<!-- DataTales Example--> 
+        <div class="card shadow mb-4">
+            <div class="card-header py-3">
+                <h6 class="m-0 font-weight-bold text-primary">Materias</h6>
+            </div>
+            {% for classroom in request.user.moderator_classroom.all %}
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table table-bordered"  width="100%" cellspacing="0">
+                                    <thead>
+                                        <tr>
+                                            <th>Nombre </th>
+                                            <th>Departamento</th>
+                                            <th>Profesor Asignado</th>
+                                            <th>Sección</th>
+                                            <th>Periodo de clase</th>
+                                            <th>Asignación</th>
+                                        </tr>
+                                    </thead>
+                                    <tfoot>
+                                        <tr>
+                                            <th>Name</th>
+                                            <th>Department</th>
+                                            <th>Assigned Teacher</th>
+                                            <th>Section</th>
+                                            <th>class period</th>
+                                            <th>Asignament</th>
+                                        </tr>
+                                    </tfoot>
+                                    <tbody>
+                                {%for moderator_classroom in request.user.moderator_classroom.all%}
+                                        <tr>
+                                        
+                        <td>{{ moderator_classroom.classroom.matter_id.name_m }}</td>
+                        <td>{{ moderator_classroom.classroom.professor_id.department }}</td>
+                        <td>{{ moderator_classroom.classroom.professor_id.users.fullname }}</td>
+                        <td>{{ moderator_classroom.classroom.section }}</td>
+                        <td>{{ moderator_classroom.classroom.classperiod }}</td>
+                        <td><a href="{% url 'evaluation:moderator-result' moderator_classroom.classroom.pk  %}" class="btn btn-success btn-sm"><strong>Resultados Evaluativos</strong> <i class="fa fa-check"></i></a></td>
+                        
+                                        </tr>
+                                {%endfor%} 
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                {%endfor%}
+                    </div>
+
+{%endblock %}

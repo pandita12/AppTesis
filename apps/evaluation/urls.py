@@ -1,5 +1,5 @@
 from django.contrib import admin
-from apps.evaluation.views import  asignament_view, EvaluationView, evaluate_view, SendtaskView, ObservationView, CorrectionView, delete
+from apps.evaluation.views import  asignament_view, EvaluationView, evaluate_view, SendtaskView, ObservationView, CorrectionView, delete, moderator_view, moderator_result
 from django.urls import include, path
 from . import views
 
@@ -20,5 +20,7 @@ urlpatterns = [
    path('<pk>/correction-evaluation/', CorrectionView.as_view(), name="correction"),
    path('<pk>/delete/',views.delete, name="delete"),
 
-
+   #Urls Moderator
+   path('<pk>/moderator/', moderator_view, name="moderator"),
+   path('<pk>/moderator-resultados/', moderator_result, name='moderator-result'),
 ]

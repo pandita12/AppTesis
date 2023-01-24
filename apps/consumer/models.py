@@ -29,7 +29,6 @@ class User(AbstractUser):
     dni = models.CharField(max_length=8, null=True, unique=True)
     direction = models.CharField(max_length=50)
     phone = models.CharField(max_length=12)
-    password = models.SlugField(max_length=255)
     types_user = models.CharField(max_length=1, choices=TYPE_USER_CHOICES, default='E')
     gender = models.CharField(max_length=1, choices=GENDER_CHOICES, default='F')
     is_student = models.BooleanField('student status', default=True)

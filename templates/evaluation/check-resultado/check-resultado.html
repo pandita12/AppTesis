@@ -35,7 +35,7 @@
                                    </td>
                                    <!--Botones para correciones de evaluaciones-->
                                    <td>
-                            <a href="#" class="btn btn-primary btn-sm" data-toggle="modal" data-target="#exampleModalCenter1"><strong> Bajar </strong> <i class="fa fa-download"></i></a>
+                            <a href="{{MEDIA_URL}}{{delivery.task_upload}}" class="btn btn-primary btn-sm"><strong> Bajar </strong> <i class="fa fa-download"></i></a>
                             <a href="{% url "evaluation:observation" delivery.pk %}" class="btn btn-warning btn-sm"><strong>Objeción</strong> <i class="fa fa-question"></i></a>
                             <a href="{% url "evaluation:correction" delivery.pk  %}" class="btn btn-success btn-sm"><strong>Corregir</strong> <i class="fa fa-check"></i></a>
                             <a href="{% url "evaluation:delete" delivery.pk %}" class="btn btn-danger btn-sm"><strong>Eliminar</strong> <i class="fa fa-trash-o"></i></a>

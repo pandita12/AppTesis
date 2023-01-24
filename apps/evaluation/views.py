@@ -22,6 +22,24 @@ def asignament_view(request, pk):
 
 	return render(request, 'evaluation/asignament/assignament.html', context)
 
+def moderator_view(request, pk):
+	evaluations = Evaluation.objects.filter(classroom_id=pk)
+	context = {
+	    "evaluations":evaluations
+	}
+	
+	return render (request, 'evaluation/moderator/moderator-classroom.html', context)
+
+def moderator_result(request, pk):
+	evaluations = Evaluation.objects.filter(classroom_id=pk)
+	deliverys_pending = Delivery.objects.filter(evaluation__classroom_id__pk=pk, ponderation__isnull=True)
+	deliverys_complete = Delivery.objects.filter(evaluation__classroom_id__pk=pk,ponderation__isnull=False)	
+	context = {
+		"deliverys_pending":deliverys_pending,
+	    "deliverys_complete":deliverys_complete,
+	    "evaluations":evaluations
+	}
+	return render(request, 'evaluation/moderator/moderator-result.html', context)
 
 class EvaluationView(View):
 	def get(self,request, *args, **kwargs):
