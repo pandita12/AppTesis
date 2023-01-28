@@ -142,3 +142,10 @@ class CorrectionView(View):
 			"form":form
 		}
 		return render(request, 'evaluation/correction-teacher/correction.html', context)
+
+
+
+def moderator_student_view(request):
+	
+
+	return render(request, 'evaluation/moderator/moderator-student.html',)

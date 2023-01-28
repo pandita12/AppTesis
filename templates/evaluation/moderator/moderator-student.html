@@ -1,5 +1,5 @@
 {% extends "base/base_system.html"%}
-<title>{% block title %} Entregas evaluativas {% endblock title %}</title>
+<title>{% block title %} Resultados detallado {% endblock title %}</title>
 
 {% block container%}
 <div class="card shadow mb-6">
@@ -25,8 +25,8 @@
                             <td>{{ evaluation.assignment_name }}</td>
                             <td>{{ evaluation.date_start }}</td>
                             <td>{{ evaluation.date_finish }}</td>
-                            <td>{{ evaluation.full_delivery }} <button><a href="{% url "evaluation:moderator-student" %}">Ver</a></button>  </td>
-                        <td><button><a href='{{MEDIA_URL}}{{evaluation.support_material}}'>Descargar</a></button>
+                            <td>{{ evaluation.full_delivery }}</td>
+                        <td><button><a href='{{MEDIA_URL}}{{evaluation.support_material}}'>ver</a></button>
                            </td>
                         </tr>
 
