@@ -23,5 +23,5 @@ urlpatterns = [
    #Urls Moderator
    path('<pk>/moderator/', moderator_view, name="moderator"),
    path('<pk>/moderator-resultados/', moderator_result, name='moderator-result'),
-   path('moderator/result/ponderation-student/', moderator_student_view, name="moderator-student"),
+   path('<pk>/moderator/result/ponderation-student/', moderator_student_view, name="moderator-student"),
 ]  

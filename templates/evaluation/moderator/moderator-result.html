@@ -25,7 +25,7 @@
                             <td>{{ evaluation.assignment_name }}</td>
                             <td>{{ evaluation.date_start }}</td>
                             <td>{{ evaluation.date_finish }}</td>
-                            <td>{{ evaluation.full_delivery }} <button><a href="{% url "evaluation:moderator-student" %}">Ver</a></button>  </td>
+                            <td>{{ evaluation.full_delivery }} <button><a href="{% url 'evaluation:moderator-student' evaluation.pk %}">Ver</a></button>  </td>
                         <td><button><a href='{{MEDIA_URL}}{{evaluation.support_material}}'>Descargar</a></button>
                            </td>
                         </tr>
