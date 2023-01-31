@@ -18,6 +18,7 @@
                                 <th ><span>Material de apoyo</span></th>
                                 <th ><span>Docente</span></th>
                                 <th >&nbsp; Botones Evaluativos</th>
+                                <th ><span>Nota (Comentario)</span></th>
                                 </tr>
                             </thead>
                            <tbody>
@@ -36,6 +37,9 @@
                                     <a href="{% url 'evaluation:send-task' evaluation.pk %}" class="btn btn-success btn-sm"><strong> Enviar Asignación </strong> <i class="fa fa-download"></i></a>
                                    </td>
                                    <!-- EndBoton-->
+                                   <td class="col-sm-2">
+                                      {{ evaluation.note_comentary }}
+                                   </td>
                                </tr>
                                {%endfor%}
                            </tbody>
@@ -109,7 +113,6 @@
                         <table class="table user-list">
                             <thead>
                                 <tr>
-                                <th><span>Asignación</span></th>
                                 <th ><span>Docente</span></th>
                                 <th ><span>Observación</span></th>
                                  <th ><span>Comentario</span></th>
@@ -118,9 +121,6 @@
                            <tbody>
                         {%for delivery in deliverys_complete%}
                                <tr>
-                                   <td>
-                                       {{ delivery.evaluation.assignment_name}}
-                                   </td>
                                    <td>
                                        {{ delivery.evaluation.classroom_id.professor_id.users.fullname }}
                                    </td>

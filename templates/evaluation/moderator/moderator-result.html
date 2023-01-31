@@ -6,7 +6,6 @@
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Resultados de entregas</h6>
             </div>
-           {%for evaluation in evaluations%}
             <div class="card-body">
                 <div class="table-responsive">
                  <table class="table table-bordered"  width="100%" cellspacing="0">
@@ -20,21 +19,20 @@
                        </tr>
                     </thead>
                      <tbody>
-                        
+                     {%for evaluation in evaluations%}
                         <tr>
                             <td>{{ evaluation.assignment_name }}</td>
                             <td>{{ evaluation.date_start }}</td>
                             <td>{{ evaluation.date_finish }}</td>
-                            <td>{{ evaluation.full_delivery }} <button><a href="{% url 'evaluation:moderator-student' evaluation.pk %}">Ver</a></button>  </td>
+                            <td>{{ evaluation.full_delivery }} 
+                           <button><a href="{% url 'evaluation:moderator-student' evaluation.pk %}">Ver</a></button></td>
                         <td><button><a href='{{MEDIA_URL}}{{evaluation.support_material}}'>Descargar</a></button>
                            </td>
                         </tr>
-
-                        
+                        {%endfor%}
                      </tbody>
                  </table>
                 </div>
             </div>
-        {%endfor%}
 	 	</div>
 {%endblock %}

@@ -146,12 +146,12 @@ class CorrectionView(View):
 
 
 def moderator_student_view(request, pk):
-	deliverys_pending = Delivery.objects.filter(evaluation_id__classroom_id__pk=pk, ponderation__isnull=True)
-	deliverys_complete = Delivery.objects.filter(evaluation_id__classroom_id__pk=pk,ponderation__isnull=False)
+	deliverys_pending = Delivery.objects.filter(evaluation=pk, ponderation__isnull=True)
+	deliverys_complete = Delivery.objects.filter(evaluation=pk,ponderation__isnull=False)
 	context = {
 		"deliverys_pending":deliverys_pending,
 	    "deliverys_complete":deliverys_complete
 	}
 	
 
-	return render(request, 'evaluation/moderator/moderator-student.html',)
+	return render(request, 'evaluation/moderator/moderator-student.html', context)

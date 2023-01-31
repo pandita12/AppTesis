@@ -7,7 +7,8 @@ from django.utils import timezone
 # Create your models here.
 
 class Evaluation(models.Model):
-    assignment_name = models.CharField(max_length=50)
+    assignment_name = models.CharField(max_length=100)
+    note_comentary = models.CharField(max_length=500, null=True, blank=True)
     support_material = models.FileField(upload_to="material", max_length=100, null=True)
     date_start = models.DateTimeField()
     date_finish = models.DateTimeField()
@@ -25,7 +26,7 @@ class Evaluation(models.Model):
 class Delivery(models.Model):
 
     deliver_date = models.DateTimeField(default=timezone.now)
-    evaluative_message = models.CharField(max_length=200, null=True, blank=True)
+    evaluative_message = models.CharField(max_length=500, null=True, blank=True)
     title_task = models.CharField(max_length=100, null=True, blank=True)
     task_upload = models.FileField(upload_to="taskupload/", max_length=100, null=True, blank=True) 
     student = models.ForeignKey(User,related_name='delivery', null=False, blank=False, on_delete=models.CASCADE)

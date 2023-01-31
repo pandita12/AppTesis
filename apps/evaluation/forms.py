@@ -3,13 +3,14 @@ from django.forms import ModelForm, CharField, FileField, DateTimeField, Checkbo
 from .models import Evaluation, Observation, Delivery, DeliveryPonderation
 
 class CreateEvaluationForm(ModelForm):
-	assignment_name = CharField(max_length=25)
+	assignment_name = CharField(max_length=100)
+	note_comentary = CharField(max_length=500)
 	support_material = FileField()
 	date_start = DateTimeField()
 	date_finish = DateTimeField()
 	class Meta:
 		model = Evaluation
-		fields = ["assignment_name", "support_material", "date_start", "date_finish"]
+		fields = ["assignment_name","note_comentary", "support_material", "date_start", "date_finish"]
 
 
 
