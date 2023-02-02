@@ -1,8 +1,11 @@
 {% extends "base/base_system.html"%}
 <title>{% block title %} Resultados detallado {% endblock title %}</title>
-
+{% load static %}
 {% block container%}
 <div class="card shadow mb-6">
+   <div class="col-md-4">
+      <button class="download" style="background:#36b9cc"><h6><strong>Generar Reporte</strong></h6></button>
+   </div>
             <div class="card-header py-3">
                 <h6 class="m-0 font-weight-bold text-primary">Resultados de entregas</h6>
             </div>
@@ -20,7 +23,6 @@
                         <tr>
                      <td><h6 class="text-center">{{ delivery.student.fullname }}</h6></td>
                   <td><h6 class="text-center">{{ delivery.ponderation.ponderation }}</h6></td>
-
                         </tr>
                       {%endfor%}   
                      </tbody>
@@ -29,3 +31,9 @@
             </div>
 	 	</div>
 {%endblock %}
+{% block extrajs %}
+      <!-- script libreria exportPdf -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js" integrity="sha512-GsLlZN/3F2ErC5ifS5QtgpiJtWd43JWSuIgh7mbzZ8zBps+dvLusV+eNQATqgA/HdeKFVgA5v3S/cIrLF7QnIg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+      <!-- script funcion -->
+    <script src="{% static 'js/exportpdf/script.js' %}"></script>
+{% endblock extrajs%}
